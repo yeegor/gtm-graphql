@@ -11,7 +11,8 @@ import Event, {
     EVENT_GTM_PURCHASE,
     EVENT_GTM_PRODUCT_DETAIL,
     EVENT_GTM_USER_REGISTER,
-    EVENT_GTM_USER_LOGIN
+    EVENT_GTM_USER_LOGIN,
+    EVENT_GTM_IMPRESSIONS_PLP
 } from '../util/Event';
 
 import { CHECKOUT_EVENT_DELAY } from '../component/GoogleTagManager/events/Checkout.event';
