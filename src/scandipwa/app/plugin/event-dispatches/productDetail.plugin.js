@@ -21,7 +21,7 @@ const componentDidMount = (args, callback, instance) => {
         _gtmProductDetail(instance);
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 const componentDidUpdate = (args, callback, instance) => {
@@ -48,7 +48,7 @@ const componentDidUpdate = (args, callback, instance) => {
         _gtmProductDetail(instance);
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 export default {

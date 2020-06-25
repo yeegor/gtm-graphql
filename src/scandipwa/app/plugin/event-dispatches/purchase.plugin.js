@@ -14,7 +14,7 @@ const setDetailsStep = (args, callback, instance) => {
         { orderID, totals: { ...totals, items } }
     );
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 export default {

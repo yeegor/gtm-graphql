@@ -4,7 +4,7 @@ import BrowserDatabase from 'Util/BrowserDatabase';
 import GoogleTagManager from '../component/GoogleTagManager/GoogleTagManager.component';
 
 const handle_syncCartWithBEError = (args, callback, instance) => {
-    return callback.apply(instance, args)
+    return callback(...args)
         .then(
             (result) => {
                 GoogleTagManager.getInstance().setGroupedProducts({});
@@ -14,7 +14,7 @@ const handle_syncCartWithBEError = (args, callback, instance) => {
 }
 
 const addGtmConfigQuery = (args, callback, instance) => ([
-    ...callback.apply(instance, args),
+    ...callback(...args),
     ConfigQuery.getGTMConfiguration()
 ]);
 
@@ -22,7 +22,7 @@ const addGtmToConfigReducerInitialState = (args, callback, instance) => {
     const { gtm } = BrowserDatabase.getItem('config') || { gtm: {} };
 
     return {
-        ...callback.apply(instance, args),
+        ...callback(...args),
         gtm
     }
 }
@@ -61,7 +61,7 @@ const afterRequestCustomerData = (args, callback, instance) => {
         gtm.setGroupedProducts(result);
     }
 
-    return callback.apply(instance, args)
+    return callback(...args)
         .then(result => {
             transferGroupedProductsData(customer.id);
             gtm.updateGroupedProductsStorageName(customer.id);

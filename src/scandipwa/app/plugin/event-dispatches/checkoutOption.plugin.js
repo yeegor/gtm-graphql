@@ -17,7 +17,7 @@ const aroundComponentDidMount = (args, callback, instance) => {
         EVENT_TIMEOUT_ON_LOAD
     );
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 const aroundSelectPaymentMethod = (args, callback, instance) => {
@@ -27,7 +27,7 @@ const aroundSelectPaymentMethod = (args, callback, instance) => {
         { step: 2, option: code }
     );
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 /** CheckoutDeliveryOptionsContainer */
@@ -44,7 +44,7 @@ const aroundComponentDidUpdate = (args, callback, instance) => {
         );
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 export default {

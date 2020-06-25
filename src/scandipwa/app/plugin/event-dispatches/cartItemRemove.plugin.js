@@ -9,7 +9,7 @@ class RemoveItemPlugin {
     */
 
     handleRemoveItem = (args, callback, instance) => {
-        callback.apply(instance, args);
+        callback(...args);
         const { item } = instance.props;
         const { qty: quantity } = item;
 
@@ -22,7 +22,7 @@ class RemoveItemPlugin {
     removeProductFromCart = (args, callback, instance) => {
         const { item, quantity } = this.handleRemoveState;
 
-        return callback.apply(instance, args)
+        return callback(...args)
             .then(
                 result => {
                     Event.dispatch(EVENT_GTM_PRODUCT_REMOVE_FROM_CART, {

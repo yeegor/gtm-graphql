@@ -31,7 +31,7 @@ const around_afterAdded = (args, callback, instance) => {
         });
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 export default {

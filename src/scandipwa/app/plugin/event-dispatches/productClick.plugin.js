@@ -23,7 +23,7 @@ const ProductCard_renderCardWrapper = (args, callback, instance) => {
         instance.registerSharedElement();
     };
 
-    const originalLink = callback.apply(instance, args);
+    const originalLink = callback(...args);
     return cloneElement(
         originalLink,
         { onClick: handleClick },

@@ -4,7 +4,7 @@ import Event, {
 } from '../../util/Event';
 
 const createAccount = (args, callback, instance) => {
-    return callback.apply(instance, args)
+    return callback(...args)
         .then((signInPromise) => {
             Event.dispatch(EVENT_GTM_USER_REGISTER);
 
@@ -13,7 +13,7 @@ const createAccount = (args, callback, instance) => {
 }
 
 const signIn = (args, callback, instance) => {
-    return callback.apply(instance, args)
+    return callback(...args)
         .then((result) => {
             Event.dispatch(EVENT_GTM_USER_LOGIN);
 

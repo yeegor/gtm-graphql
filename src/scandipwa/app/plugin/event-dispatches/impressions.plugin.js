@@ -38,7 +38,7 @@ const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
         Event.dispatch(EVENT_GTM_IMPRESSIONS_WISHLIST, { items });
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 /** ProductLinks */
@@ -57,12 +57,12 @@ const ProductLinks_componentDidUpdate = (args, callback, instance) => {
         }
     }
 
-    callback.apply(instance, args);
+    callback(...args);
 }
 
 /** ProductList */
 const ProductList_componentDidUpdate = (args, callback, instance) => {
-    callback.apply(instance, args);
+    callback(...args);
 
     const [prevProps] = args;
     const {

@@ -18,13 +18,13 @@ class QuantityChangePlugin {
             item
         };
 
-        callback.apply(instance, args);
+        callback(...args);
     }
 
     changeItemQty = (args, callback, instance) => {
         const { newQuantity, item, oldQuantity } = this.handleChangeState;
 
-        return callback.apply(instance, args)
+        return callback(...args)
             .then(
                 result => {
                     if (oldQuantity < newQuantity) {

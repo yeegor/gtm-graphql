@@ -21,7 +21,7 @@ const componentDidMount = (args, callback, instance) => {
         CHECKOUT_EVENT_DELAY
     );
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 const componentDidUpdate = (args, callback, instance) => {
@@ -42,7 +42,7 @@ const componentDidUpdate = (args, callback, instance) => {
         });
     }
 
-    return callback.apply(instance, args);
+    return callback(...args);
 }
 
 
