@@ -5,11 +5,19 @@ import Event, {
 import { CHECKOUT_EVENT_DELAY } from '../../component/GoogleTagManager/events/Checkout.event';
 import { BILLING_STEP } from 'Route/Checkout/Checkout.component';
 
+export const GTM_CART_PAGE_STEP = 1;
+export const GTM_SHIPPING_STEP = 2;
+export const GTM_BILLING_STEP = 3;
+
 const componentDidMount = (args, callback, instance) => {
     const { totals = {} } = instance.props;
+    const { checkoutStep } = instance.state || {};
 
     setTimeout(
-        () => Event.dispatch(EVENT_GTM_CHECKOUT, { totals, step: 1 }),
+        () => Event.dispatch(EVENT_GTM_CHECKOUT, {
+            totals,
+            step: checkoutStep ? GTM_SHIPPING_STEP : GTM_CART_PAGE_STEP
+        }),
         CHECKOUT_EVENT_DELAY
     );
 
@@ -22,9 +30,16 @@ const componentDidUpdate = (args, callback, instance) => {
     const { checkoutStep, isLoading } = instance.state;
     const { checkoutStep: prevCheckoutStep } = prevState;
 
-    if (!isLoading && checkoutStep === BILLING_STEP && checkoutStep !== prevCheckoutStep) {
+    if (
+        !isLoading
+        && checkoutStep === BILLING_STEP
+        && checkoutStep !== prevCheckoutStep
+    ) {
         const { totals } = instance.props;
-        Event.dispatch(EVENT_GTM_CHECKOUT, { totals, step: 2 });
+        Event.dispatch(EVENT_GTM_CHECKOUT, {
+            totals,
+            step: GTM_BILLING_STEP
+        });
     }
 
     return callback.apply(instance, args);
@@ -38,4 +53,9 @@ export default {
             'componentDidUpdate': componentDidUpdate,
         }
     },
+    'Route/CartPage/Container': {
+        'member-function': {
+            'componentDidMount': componentDidMount
+        }
+    }
 }
