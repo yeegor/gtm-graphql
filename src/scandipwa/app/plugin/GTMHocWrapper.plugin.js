@@ -31,7 +31,7 @@ const myAccount = Class => withGTM(Class, CUSTOMER_ACCOUNT);
 const menuPage = Class => withGTM(Class, MENU);
 const urlRewrites = Class => withGTM(Class, URL_REWRITE);
 
-const config = {
+export default {
     'Route/HomePage/Container': { 'class': homePage },
     'Route/CategoryPage/Container': { 'class': categoryPage },
     'Route/SearchPage/Container': { 'class': searchPage },
@@ -45,5 +45,3 @@ const config = {
     'Route/MenuPage/Container': { 'class': menuPage },
     'Route/UrlRewrites/Container': { 'class': urlRewrites },
 };
-
-export default config;

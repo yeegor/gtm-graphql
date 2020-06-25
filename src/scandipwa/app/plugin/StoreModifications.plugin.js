@@ -70,7 +70,7 @@ const afterRequestCustomerData = (args, callback, instance) => {
         })
 }
 
-const config = {
+export default {
     'Store/Cart/Dispatcher': {
         'member-function': {
             'handle_syncCartWithBEError': handle_syncCartWithBEError
@@ -93,5 +93,3 @@ const config = {
         }
     }
 };
-
-export default config;

@@ -15,12 +15,10 @@ const addGtmComponent = (member, context) => {
     ];
 };
 
-const config = {
+export default {
     'Component/Router/Component': {
         'member-property': {
             [BEFORE_ITEMS_TYPE]: addGtmComponent
         }
     }
 };
-
-export default config;
