@@ -1,13 +1,11 @@
 import Event, {
     EVENT_GTM_PRODUCT_REMOVE_FROM_CART
 } from '../../util/Event';
+import { EVENT_REMOVE_FROM_CART } from '../../component/GoogleTagManager/GoogleTagManager.component';
+import { isEventEnabled } from '../../util/EventConfig';
 
 // TODO split
 class RemoveItemPlugin {
-    /*
-        handleRemoveState = {};
-    */
-
     handleRemoveItem = (args, callback, instance) => {
         callback(...args);
         const { item } = instance.props;
@@ -16,10 +14,12 @@ class RemoveItemPlugin {
         this.handleRemoveState = {
             item,
             quantity
-        }
-    }
+        };
+    };
 
     removeProductFromCart = (args, callback, instance) => {
+        if (!isEventEnabled(EVENT_REMOVE_FROM_CART)) return callback(...args);
+
         const { item, quantity } = this.handleRemoveState;
 
         return callback(...args)
@@ -33,7 +33,7 @@ class RemoveItemPlugin {
                     return result;
                 }
             );
-    }
+    };
 }
 
 const {

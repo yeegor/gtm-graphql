@@ -12,6 +12,8 @@
 
 import Event, { EVENT_GTM_USER_REGISTER } from '../../../util/Event';
 import BaseEvent from './BaseEvent.event';
+import { isEventEnabled } from '../../../util/EventConfig';
+import { EVENT_USER_REGISTER } from '../GoogleTagManager.component';
 
 export const USER_REGISTRATION_EVENT_DELAY = 500;
 export const SPAM_PROTECTION_DELAY = 100;
@@ -31,6 +33,8 @@ export default class UserRegistrationEvent extends BaseEvent {
      * Bind
      */
     bindEvent() {
+        if (!isEventEnabled(EVENT_USER_REGISTER)) return;
+
         Event.observer(EVENT_GTM_USER_REGISTER, () => {
             this.handle();
         });
@@ -44,6 +48,8 @@ export default class UserRegistrationEvent extends BaseEvent {
      * Handle
      */
     handler() {
+        if (!isEventEnabled(EVENT_USER_REGISTER)) return;
+
         if (this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }

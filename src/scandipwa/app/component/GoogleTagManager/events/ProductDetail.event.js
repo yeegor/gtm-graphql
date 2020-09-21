@@ -13,6 +13,8 @@
 import Event, { EVENT_GTM_PRODUCT_DETAIL, EVENT_GTM_GENERAL_INIT } from '../../../util/Event';
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
+import { isEventEnabled } from '../../../util/EventConfig';
+import { EVENT_PRODUCT_DETAIL } from '../GoogleTagManager.component';
 
 export const SPAM_PROTECTION_TIMEOUT = 2000;
 export const EVENT_EXECUTION_DELAY = 500;
@@ -32,6 +34,8 @@ class ProductDetail extends BaseEvent {
      * Bind on product detail
      */
     bindEvent() {
+        if (!isEventEnabled(EVENT_PRODUCT_DETAIL)) return;
+
         Event.observer(EVENT_GTM_PRODUCT_DETAIL, ({ product, pathname }) => {
             setTimeout(() => {
                 this.handle(product, pathname);
@@ -50,6 +54,8 @@ class ProductDetail extends BaseEvent {
      * @param pathname
      */
     handler(product, pathname) {
+        if (!isEventEnabled(EVENT_PRODUCT_DETAIL)) return;
+
         const { sku, type_id } = product;
         if (this.spamProtection(SPAM_PROTECTION_TIMEOUT, sku)
             || pathname === this.lastPath

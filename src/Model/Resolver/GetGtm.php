@@ -17,8 +17,6 @@ use Magento\Framework\GraphQl\Query\Resolver\Value;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Store\Model\ScopeInterface;
-use ScandiPWA\Gtm\Model\Config\Source\ElementType;
-use ScandiPWA\Gtm\Model\Config\Source\Type;
 
 /**
  * Class GetGtm
@@ -39,7 +37,8 @@ class GetGtm implements ResolverInterface
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig
-    ) {
+    )
+    {
         $this->scopeConfig = $scopeConfig;
     }
 
@@ -58,7 +57,23 @@ class GetGtm implements ResolverInterface
     {
         return [
             'enabled' => !!$this->getConfigData('enabled'),
-            'gtm_id' => $this->getConfigData('gtm_id')
+            'gtm_id' => $this->getConfigData('gtm_id'),
+            'events' => [
+                'general' => $this->getConfigData('general', 'events'),
+                'productImpression' => $this->getConfigData('productImpression', 'events'),
+                'productClick' => $this->getConfigData('productClick', 'events'),
+                'productDetail' => $this->getConfigData('productDetail', 'events'),
+                'addToCart' => $this->getConfigData('addToCart', 'events'),
+                'removeFromCart' => $this->getConfigData('removeFromCart', 'events'),
+                'checkout' => $this->getConfigData('checkout', 'events'),
+                'checkoutOption' => $this->getConfigData('checkoutOption', 'events'),
+                'purchase' => $this->getConfigData('purchase', 'events'),
+                'userLogin' => $this->getConfigData('userLogin', 'events'),
+                'userRegister' => $this->getConfigData('userRegister', 'events'),
+                'notFound' => $this->getConfigData('notFound', 'events'),
+                'categoryFilters' => $this->getConfigData('categoryFilters', 'events'),
+                'additional' => $this->getConfigData('additional', 'events'),
+            ]
         ];
     }
 

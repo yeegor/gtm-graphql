@@ -14,7 +14,8 @@ import Event, { EVENT_GTM_PRODUCT_CLICK } from '../../../util/Event';
 
 import BaseEvent from './BaseEvent.event';
 import ProductHelper from '../utils';
-import { EVENT_IMPRESSION } from '../GoogleTagManager.component';
+import { EVENT_IMPRESSION, EVENT_PRODUCT_CLICK } from '../GoogleTagManager.component';
+import { isEventEnabled } from '../../../util/EventConfig';
 
 /**
  * Product click event
@@ -31,6 +32,8 @@ class ProductClickEvent extends BaseEvent {
      * Bind click events
      */
     bindEvent() {
+        if (!isEventEnabled(EVENT_PRODUCT_CLICK)) return;
+
         Event.observer(EVENT_GTM_PRODUCT_CLICK, (product) => {
             this.handle(product);
         });
@@ -40,6 +43,8 @@ class ProductClickEvent extends BaseEvent {
      * Handle product click
      */
     handler(product) {
+        if (!isEventEnabled(EVENT_PRODUCT_CLICK)) return;
+
         const {
             position = 1,
             list = ''

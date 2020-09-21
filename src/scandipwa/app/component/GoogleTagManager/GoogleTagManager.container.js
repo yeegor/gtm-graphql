@@ -11,6 +11,7 @@
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 import GoogleTagManager from './GoogleTagManager.component';
 
 const mapStateToProps = state => ({

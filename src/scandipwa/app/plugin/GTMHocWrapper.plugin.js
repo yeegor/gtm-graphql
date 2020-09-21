@@ -8,8 +8,7 @@ import {
     CMS_PAGE,
     HOME_PAGE,
     CUSTOMER_ACCOUNT
-} from 'Component/Header';
-
+} from 'Component/Header/Header.config';
 
 export const URL_REWRITE = 'url-rewrite';
 export const PASSWORD_CHANGE = 'password-change';
@@ -34,8 +33,8 @@ const urlRewrites = Class => withGTM(Class, URL_REWRITE);
 export default {
     'Route/HomePage/Container': { 'class': homePage },
     'Route/CategoryPage/Container': { 'class': categoryPage },
-    'Route/SearchPage/Container': { 'class': searchPage },
     'Route/ProductPage/Container': { 'class': productPage },
+    'Route/SearchPage/Container': { 'class': searchPage },
     'Route/CmsPage/Container': { 'class': cmsPage },
     'Route/CartPage/Container': { 'class': cartPage },
     'Route/Checkout/Container': { 'class': checkout },
@@ -43,5 +42,5 @@ export default {
     'Route/ConfirmAccountPage/Container': { 'class': confirmAccountPage },
     'Route/MyAccount/Container': { 'class': myAccount },
     'Route/MenuPage/Container': { 'class': menuPage },
-    'Route/UrlRewrites/Container': { 'class': urlRewrites },
+    'Route/UrlRewrites/Container': { 'class': urlRewrites }
 };

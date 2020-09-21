@@ -13,6 +13,8 @@
 import Event, { EVENT_GTM_PRODUCT_ADD_TO_CART } from '../../../util/Event';
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
+import { isEventEnabled } from '../../../util/EventConfig';
+import { EVENT_ADD_TO_CART } from '../GoogleTagManager.component';
 
 export const GROUPED_CART_PRODUCTS = 'GROUPED_CART_PRODUCTS';
 export const SPAM_PROTECTION_DELAY = 200;
@@ -24,6 +26,8 @@ class AddToCartEvent extends BaseEvent {
      * Bind add to cart
      */
     bindEvent() {
+        if (!isEventEnabled(EVENT_ADD_TO_CART)) return;
+
         Event.observer(EVENT_GTM_PRODUCT_ADD_TO_CART, ({
             product,
             quantity,
@@ -48,6 +52,8 @@ class AddToCartEvent extends BaseEvent {
      * Handle product add to cart
      */
     handler(product, quantity, isItem, isGrouped, isFromCart, massAddAction) {
+        if (!isEventEnabled(EVENT_ADD_TO_CART)) return;
+
         if (!massAddAction && this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }

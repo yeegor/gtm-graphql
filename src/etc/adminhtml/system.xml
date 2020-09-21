@@ -31,6 +31,108 @@
                     <comment>Account to push events</comment>
                 </field>
             </group>
+            <group id="events" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>DataLayer Push Events Configuration</label>
+
+                <field id="general" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>general DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>pageType, storeView, language, customerId, cart dataLayer variables</comment>
+                </field>
+
+                <field id="productImpression" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>impression DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product impressions tracking</comment>
+                </field>
+
+                <field id="productClick" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>productClick DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product clicks tracking</comment>
+                </field>
+
+                <field id="productDetail" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>productDetail DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product detail views tracking</comment>
+                </field>
+
+                <field id="addToCart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>addToCart DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product add to cart tracking</comment>
+                </field>
+
+                <field id="removeFromCart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>improveFromCart DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product remove from cart tracking</comment>
+                </field>
+
+                <field id="checkout" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>checkout DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for checkout initiation and step tracking</comment>
+                </field>
+
+                <field id="checkoutOption" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>checkoutOption DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for checkout options tracking</comment>
+                </field>
+
+                <field id="purchase" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>purchase DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enhanced eCommerce dataLayer event for product purchases tracking</comment>
+                </field>
+
+                <field id="userLogin" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>LoginDataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Custom dataLayer event for user login tracking</comment>
+                </field>
+
+                <field id="userRegister" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Registration DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Custom dataLayer event for user account creation tracking</comment>
+                </field>
+
+                <field id="notFound" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>404 DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Custom dataLayer event for 404 page tracking as event</comment>
+                </field>
+
+                <field id="categoryFilters" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Category filters DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Custom dataLayer event for category filter usage</comment>
+                </field>
+
+                <field id="additional" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Additional custom DataLayer push event enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Custom dataLayer event for search results, error messages etc</comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>

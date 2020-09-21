@@ -13,7 +13,7 @@ import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import { roundPrice } from 'Util/Price';
 export const URL_REWRITE = 'url-rewrite';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import { MyAccountDispatcher } from 'Store/MyAccount';
+import MyAccountDispatcher from 'Store/MyAccount/MyAccount.dispatcher';
 import ProductHelper from '../utils';
 
 export const DATA_RECHECK_TIMEOUT = 1500;
@@ -253,21 +253,24 @@ class BaseEvent {
      * @return {string}
      */
     getPageType() {
-        const { urlRewrite, currentRouteName } = window;
+        const urlRewrite = this.getAppState().UrlRewritesReducer.urlRewrite.type;
+        const { /*urlRewrite,*/ currentRouteName } = window;
 
-        if (currentRouteName === URL_REWRITE) {
-            if (typeof urlRewrite === 'undefined') {
+        // if (currentRouteName === URL_REWRITE) {
+            if (!urlRewrite || !Object.keys(urlRewrite).length) {
                 return '';
             }
+
+            return urlRewrite;
 
             if (urlRewrite.notFound) {
                 return 'notfound';
             }
 
             return (urlRewrite.type || '').toLowerCase();
-        }
+        // }
 
-        return (currentRouteName || '').toLowerCase();
+        // return (currentRouteName || '').toLowerCase();
     }
 
     /**
