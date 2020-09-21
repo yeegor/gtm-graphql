@@ -253,24 +253,21 @@ class BaseEvent {
      * @return {string}
      */
     getPageType() {
-        const urlRewrite = this.getAppState().UrlRewritesReducer.urlRewrite.type;
-        const { /*urlRewrite,*/ currentRouteName } = window;
+        const { urlRewrite, currentRouteName } = window;
 
-        // if (currentRouteName === URL_REWRITE) {
-            if (!urlRewrite || !Object.keys(urlRewrite).length) {
+        if (currentRouteName === URL_REWRITE) {
+            if (typeof urlRewrite === 'undefined') {
                 return '';
             }
-
-            return urlRewrite;
 
             if (urlRewrite.notFound) {
                 return 'notfound';
             }
 
             return (urlRewrite.type || '').toLowerCase();
-        // }
+        }
 
-        // return (currentRouteName || '').toLowerCase();
+        return (currentRouteName || '').toLowerCase();
     }
 
     /**
