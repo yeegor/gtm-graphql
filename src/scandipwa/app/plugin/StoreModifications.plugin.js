@@ -32,7 +32,7 @@ const addGtmToConfigReducerInitialState = (args, callback, instance) => {
 };
 
 const addGtmToConfigUpdate = (args, callback, context) => {
-    const [action] = args;
+    const [, action] = args;
     const originalUpdatedState = callback.apply(context, args);
 
     if (!action) {
