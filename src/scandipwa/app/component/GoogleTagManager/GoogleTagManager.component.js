@@ -75,8 +75,7 @@ class GoogleTagManager extends PureComponent {
             gtm_id: ''
         },
         state: {},
-        dispatch: () => {
-        }
+        dispatch: () => {}
     };
 
     /**
