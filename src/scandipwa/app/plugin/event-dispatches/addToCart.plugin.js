@@ -12,12 +12,8 @@
 import Event, {
     EVENT_GTM_PRODUCT_ADD_TO_CART
 } from '../../util/Event';
-import { EVENT_ADD_TO_CART } from '../../component/GoogleTagManager/GoogleTagManager.component';
-import { isEventEnabled } from '../../util/EventConfig';
 
 const aroundAfterAddToCart = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_ADD_TO_CART)) return callback(...args);
-
     const {
         product,
         product: { type_id, variants },

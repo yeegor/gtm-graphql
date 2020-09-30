@@ -11,14 +11,10 @@
 
 import GoogleTagManagerRouteWrapperComponent from './GoggleTagManagerRouteWrapper.component';
 
-const withGTM = (WrappableComponent, gtmRoute) => class WithGTM extends WrappableComponent {
-    render() {
-        return (
-            <GoogleTagManagerRouteWrapperComponent route={ gtmRoute }>
-                { super.render() }
-            </GoogleTagManagerRouteWrapperComponent>
-        );
-    }
-};
+const withGTM = (originalRender, gtmRoute) => (
+    <GoogleTagManagerRouteWrapperComponent route={ gtmRoute }>
+        { originalRender }
+    </GoogleTagManagerRouteWrapperComponent>
+);
 
 export default withGTM;

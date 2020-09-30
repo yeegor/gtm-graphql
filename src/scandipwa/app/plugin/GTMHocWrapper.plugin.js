@@ -16,31 +16,23 @@ export const CONFIRM_ACCOUNT = 'confirm_account';
 
 import withGTM from '../component/GoogleTagManager/withGTM.hoc';
 
-// TODO forgot password without HOC
-const homePage = Class => withGTM(Class, HOME_PAGE);
-const categoryPage = Class => withGTM(Class, CATEGORY);
-const searchPage = Class => withGTM(Class, SEARCH);
-const productPage = Class => withGTM(Class, PDP);
-const cmsPage = Class => withGTM(Class, CMS_PAGE);
-const cartPage = Class => withGTM(Class, CART);
-const checkout = Class => withGTM(Class, CHECKOUT);
-const passwordChangePage = Class => withGTM(Class, PASSWORD_CHANGE);
-const confirmAccountPage = Class => withGTM(Class, CONFIRM_ACCOUNT);
-const myAccount = Class => withGTM(Class, CUSTOMER_ACCOUNT);
-const menuPage = Class => withGTM(Class, MENU);
-const urlRewrites = Class => withGTM(Class, URL_REWRITE);
+const wrapperFunction = (route) => (args, callback, instance) => {
+    const originalRender = callback.apply(instance, args);
+
+    return withGTM(originalRender, route);
+}
 
 export default {
-    'Route/HomePage/Container': { 'class': homePage },
-    'Route/CategoryPage/Container': { 'class': categoryPage },
-    'Route/ProductPage/Container': { 'class': productPage },
-    'Route/SearchPage/Container': { 'class': searchPage },
-    'Route/CmsPage/Container': { 'class': cmsPage },
-    'Route/CartPage/Container': { 'class': cartPage },
-    'Route/Checkout/Container': { 'class': checkout },
-    'Route/PasswordChangePage/Container': { 'class': passwordChangePage },
-    'Route/ConfirmAccountPage/Container': { 'class': confirmAccountPage },
-    'Route/MyAccount/Container': { 'class': myAccount },
-    'Route/MenuPage/Container': { 'class': menuPage },
-    'Route/UrlRewrites/Container': { 'class': urlRewrites }
+    'Route/HomePage/Container': { 'member-function': { render: wrapperFunction(HOME_PAGE) } },
+    'Route/CategoryPage/Container': { 'member-function': { render: wrapperFunction(CATEGORY) } },
+    'Route/ProductPage/Container': { 'member-function': { render: wrapperFunction(PDP) } },
+    'Route/SearchPage/Container': { 'member-function': { render: wrapperFunction(SEARCH) } },
+    'Route/CmsPage/Container': { 'member-function': { render: wrapperFunction(CMS_PAGE) } },
+    'Route/CartPage/Container': { 'member-function': { render: wrapperFunction(CART) } },
+    'Route/Checkout/Container': { 'member-function': { render: wrapperFunction(CHECKOUT) } },
+    'Route/PasswordChangePage/Container': { 'member-function': { render: wrapperFunction(PASSWORD_CHANGE) } },
+    'Route/ConfirmAccountPage/Container': { 'member-function': { render: wrapperFunction(CONFIRM_ACCOUNT) } },
+    'Route/MyAccount/Container': { 'member-function': { render: wrapperFunction(CUSTOMER_ACCOUNT) } },
+    'Route/MenuPage/Container': { 'member-function': { render: wrapperFunction(MENU) } },
+    'Route/UrlRewrites/Container': { 'member-function': { render: wrapperFunction(URL_REWRITE) } }
 };

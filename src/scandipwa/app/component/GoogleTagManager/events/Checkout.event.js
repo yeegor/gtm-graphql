@@ -13,8 +13,6 @@
 import Event, { EVENT_GTM_CHECKOUT } from '../../../util/Event';
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_CHECKOUT } from '../GoogleTagManager.component';
 
 export const CHECKOUT_EVENT_DELAY = 500;
 export const SPAM_PROTECTION_DELAY = 1000;
@@ -34,8 +32,6 @@ class CheckoutEvent extends BaseEvent {
      * Bind
      */
     bindEvent() {
-        if (isEventEnabled(EVENT_CHECKOUT)) return;
-
         Event.observer(EVENT_GTM_CHECKOUT, ({ totals, step }) => {
             this.handle(totals, step);
         });
@@ -45,8 +41,6 @@ class CheckoutEvent extends BaseEvent {
      * Handle
      */
     handler(totals, step) {
-        if (isEventEnabled(EVENT_CHECKOUT)) return;
-
         if (this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }

@@ -13,8 +13,6 @@
 import Event, { EVENT_GTM_PRODUCT_REMOVE_FROM_CART } from '../../../util/Event';
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_REMOVE_FROM_CART } from '../GoogleTagManager.component';
 
 export const SPAM_PROTECTION_DELAY = 200;
 /**
@@ -25,8 +23,6 @@ class RemoveFromCartEvent extends BaseEvent {
      * Bind add to cart
      */
     bindEvent() {
-        if (!isEventEnabled(EVENT_REMOVE_FROM_CART)) return;
-
         Event.observer(EVENT_GTM_PRODUCT_REMOVE_FROM_CART, ({
             item,
             quantity
@@ -39,8 +35,6 @@ class RemoveFromCartEvent extends BaseEvent {
      * Handle product add to cart
      */
     handler(item, quantity) {
-        if (!isEventEnabled(EVENT_REMOVE_FROM_CART)) return;
-
         if (this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }

@@ -7,14 +7,10 @@ import Event, {
 } from '../../util/Event';
 
 import { getQueryParam } from 'Util/Url';
-import { HOME_PAGE, SEARCH } from 'Component/Header';
-import { isEventEnabled } from '../../util/EventConfig';
-import { EVENT_IMPRESSION } from '../../component/GoogleTagManager/GoogleTagManager.component';
+import { HOME_PAGE, SEARCH } from 'Component/Header/Header.config';
 
 /** MyAccountMyWishlistContainer */
 const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_IMPRESSION)) return callback(...args);
-
     const { wishlistItems, isWishlistLoading } = instance.props;
 
     if (!isWishlistLoading && Object.keys(wishlistItems).length > 0) {
@@ -47,8 +43,6 @@ const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
 
 /** ProductLinks */
 const ProductLinks_componentDidUpdate = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_IMPRESSION)) return callback(...args);
-
     const [prevProps] = args;
 
     const { areDetailsLoaded } = instance.props;
@@ -69,8 +63,6 @@ const ProductLinks_componentDidUpdate = (args, callback, instance) => {
 /** ProductList */
 const ProductList_componentDidUpdate = (args, callback, instance) => {
     callback(...args);
-
-    if (!isEventEnabled(EVENT_IMPRESSION)) return;
 
     const [prevProps] = args;
     const {

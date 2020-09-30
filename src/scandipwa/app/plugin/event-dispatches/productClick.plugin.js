@@ -3,13 +3,9 @@ import { cloneElement } from 'react';
 import Event, {
     EVENT_GTM_PRODUCT_CLICK
 } from '../../util/Event';
-import { isEventEnabled } from '../../util/EventConfig';
-import { EVENT_PRODUCT_CLICK } from '../../component/GoogleTagManager/GoogleTagManager.component';
 
 /** ProductCard */
 const ProductCard_renderCardWrapper = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_PRODUCT_CLICK)) return callback(...args);
-
     const [children] = args;
     const handleClick = () => {
         const {

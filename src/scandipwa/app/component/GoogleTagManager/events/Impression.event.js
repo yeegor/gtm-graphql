@@ -10,16 +10,18 @@
  */
 
 import Event, {
-    EVENT_GTM_IMPRESSIONS_SEARCH, EVENT_GTM_IMPRESSIONS_HOME, EVENT_GTM_IMPRESSIONS_CROSS_SELL,
-    EVENT_GTM_IMPRESSIONS_PLP, EVENT_GTM_IMPRESSIONS_WISHLIST, EVENT_GTM_IMPRESSIONS_LINKED,
+    EVENT_GTM_IMPRESSIONS_SEARCH,
+    EVENT_GTM_IMPRESSIONS_HOME,
+    EVENT_GTM_IMPRESSIONS_CROSS_SELL,
+    EVENT_GTM_IMPRESSIONS_PLP,
+    EVENT_GTM_IMPRESSIONS_WISHLIST,
+    EVENT_GTM_IMPRESSIONS_LINKED,
     EVENT_GTM_GENERAL_INIT
 } from '../../../util/Event';
 
 import BaseEvent from './BaseEvent.event';
 import { getCurrentVariantIndexFromFilters } from '../../../util/Product';
 import ProductHelper from '../utils';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_GENERAL, EVENT_IMPRESSION } from '../GoogleTagManager.component';
 
 /**
  * Website places, from where was received event data
@@ -61,43 +63,40 @@ class Impression extends BaseEvent {
      * Bind PWA event handling
      */
     bindEvent() {
-        if (isEventEnabled(EVENT_IMPRESSION)) {
-            // PLP
-            Event.observer(EVENT_GTM_IMPRESSIONS_PLP, ({ items, filters, category }) => {
-                this.handle(PLP_IMPRESSIONS, items, filters, category);
-            });
+        // PLP
+        Event.observer(EVENT_GTM_IMPRESSIONS_PLP, ({ items, filters, category }) => {
+            this.handle(PLP_IMPRESSIONS, items, filters, category);
+        });
 
-            // Home
-            Event.observer(EVENT_GTM_IMPRESSIONS_HOME, ({ items, filters }) => {
-                this.handle(HOME_IMPRESSIONS, items, filters);
-            });
+        // Home
+        Event.observer(EVENT_GTM_IMPRESSIONS_HOME, ({ items, filters }) => {
+            this.handle(HOME_IMPRESSIONS, items, filters);
+        });
 
-            // Checkout Cross-sell
-            Event.observer(EVENT_GTM_IMPRESSIONS_CROSS_SELL, ({ items }) => {
-                this.handle(CHECKOUT_CROSS_SELL_IMPRESSIONS, items);
-            });
+        // Checkout Cross-sell
+        Event.observer(EVENT_GTM_IMPRESSIONS_CROSS_SELL, ({ items }) => {
+            this.handle(CHECKOUT_CROSS_SELL_IMPRESSIONS, items);
+        });
 
-            // Wishlist
-            Event.observer(EVENT_GTM_IMPRESSIONS_WISHLIST, ({ items }) => {
-                this.handle(WISHLIST_IMPRESSIONS, items);
-            });
+        // Wishlist
+        Event.observer(EVENT_GTM_IMPRESSIONS_WISHLIST, ({ items }) => {
+            this.handle(WISHLIST_IMPRESSIONS, items);
+        });
 
-            // Search
-            Event.observer(EVENT_GTM_IMPRESSIONS_SEARCH, ({ items }) => {
-                this.handle(SEARCH_IMPRESSIONS, items);
-            });
+        // Search
+        Event.observer(EVENT_GTM_IMPRESSIONS_SEARCH, ({ items }) => {
+            this.handle(SEARCH_IMPRESSIONS, items);
+        });
 
-            // Recomended
-            Event.observer(EVENT_GTM_IMPRESSIONS_LINKED, ({ items }) => {
-                this.handle(RECOMMENDED_IMPRESSIONS, items);
-            });
-        }
+        // Recommended
+        Event.observer(EVENT_GTM_IMPRESSIONS_LINKED, ({ items }) => {
+            this.handle(RECOMMENDED_IMPRESSIONS, items);
+        });
 
-        if (isEventEnabled(EVENT_GENERAL)) {
-            Event.observer(EVENT_GTM_GENERAL_INIT, () => {
-                this.cleanStorage();
-            });
-        }
+        // General
+        Event.observer(EVENT_GTM_GENERAL_INIT, () => {
+            this.cleanStorage();
+        });
     }
 
     /**
@@ -108,8 +107,6 @@ class Impression extends BaseEvent {
      * @param filters Category filters
      */
     handler(productCollectionType = PLP_IMPRESSIONS, products = [], filters = {}, category = {}) {
-        if (!isEventEnabled(EVENT_IMPRESSION)) return;
-
         const impressions = this.getImpressions(productCollectionType, products, filters, category);
         const storage = this.getStorage();
         const impressionUID = this.getImpressionUID(impressions);

@@ -1,12 +1,6 @@
-import Event, {
-    EVENT_GTM_PURCHASE
-} from '../../util/Event';
-import { EVENT_PURCHASE } from '../../component/GoogleTagManager/GoogleTagManager.component';
-import { isEventEnabled } from '../../util/EventConfig';
+import Event, { EVENT_GTM_PURCHASE } from '../../util/Event';
 
 const setDetailsStep = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_PURCHASE)) return callback(...args);
-
     const [orderID] = args;
     const {
         totals: { items = [] }

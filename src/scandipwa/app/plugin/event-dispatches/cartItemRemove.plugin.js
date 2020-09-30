@@ -1,8 +1,6 @@
 import Event, {
     EVENT_GTM_PRODUCT_REMOVE_FROM_CART
 } from '../../util/Event';
-import { EVENT_REMOVE_FROM_CART } from '../../component/GoogleTagManager/GoogleTagManager.component';
-import { isEventEnabled } from '../../util/EventConfig';
 
 // TODO split
 class RemoveItemPlugin {
@@ -18,8 +16,6 @@ class RemoveItemPlugin {
     };
 
     removeProductFromCart = (args, callback, instance) => {
-        if (!isEventEnabled(EVENT_REMOVE_FROM_CART)) return callback(...args);
-
         const { item, quantity } = this.handleRemoveState;
 
         return callback(...args)

@@ -56,8 +56,8 @@ export default class Product {
     /**
      * Get product brand from product object
      *
-     * @param product
      * @return {string|string}
+     * @param selectedVariant
      */
     static getBrand(selectedVariant) {
         const { attributes = {} } = selectedVariant;
@@ -90,9 +90,10 @@ export default class Product {
     /**
      * Get item data as object
      *
-     * @param product
      *
      * @return {{quantity: number, price: number, name: string, variant: string, id: string, availability: boolean, list: string, category: string, brand: string}}
+     * @param item
+     * @param isVariantPassed
      */
     static getItemData(item, isVariantPassed = false) {
         if (item && Object.values(item).length) {
@@ -132,7 +133,9 @@ export default class Product {
     }
 
     /**
-     * @param { [sku]: { data: {}, items: [childSku1, childSku2], groupedProductPrice: int } }
+     * @param groupedProductData
+     * @param product
+     * @param groupedProductPrice
      */
     static addGroupedProduct(groupedProductData, product, groupedProductPrice) {
         const GTMInstance = GoogleTagManager.getInstance();
@@ -234,6 +237,7 @@ export default class Product {
      *
      * @param product
      *
+     * @param isVariantPassed
      * @return {{quantity: number, price: number, name: string, variant: string, id: string, availability: boolean, list: string, category: string, brand: string}}
      */
     static getProductData(product, isVariantPassed = false) {

@@ -12,8 +12,6 @@
 
 import Event, { EVENT_GTM_CHECKOUT_OPTION } from '../../../util/Event';
 import BaseEvent from './BaseEvent.event';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_CHECKOUT_OPTION } from '../GoogleTagManager.component';
 
 export const CHECKOUT_OPTIONS_EVENT_DELAY = 500;
 export const EVENT_TIMEOUT_ON_LOAD = 1000;
@@ -34,8 +32,6 @@ export default class CheckoutOptionEvent extends BaseEvent {
      * Bind
      */
     bindEvent() {
-        if (isEventEnabled(EVENT_CHECKOUT_OPTION)) return;
-
         Event.observer(EVENT_GTM_CHECKOUT_OPTION, ({ step, option }) => {
             this.handle(step, option);
         });
@@ -45,8 +41,6 @@ export default class CheckoutOptionEvent extends BaseEvent {
      * Handle
      */
     handler(step, option) {
-        if (isEventEnabled(EVENT_CHECKOUT_OPTION)) return;
-
         if (this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }

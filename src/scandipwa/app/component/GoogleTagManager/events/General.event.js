@@ -12,8 +12,6 @@
 
 import Event, { EVENT_GTM_META_UPDATE, EVENT_GTM_GENERAL_INIT } from '../../../util/Event';
 import BaseEvent from './BaseEvent.event';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_GENERAL } from '../GoogleTagManager.component';
 
 export const GENERAL_EVENT_DELAY = 500;
 
@@ -53,8 +51,6 @@ class General extends BaseEvent {
             this.saveCartDataToStorage();
             this.handle();
         }, GENERAL_EVENT_DELAY);
-
-        if (!isEventEnabled(EVENT_GENERAL)) return;
 
         // eslint-disable-next-line prefer-destructuring
         const history = this.getGTM().props.history;
@@ -96,8 +92,6 @@ class General extends BaseEvent {
      * Handler General
      */
     handler() {
-        if (!isEventEnabled(EVENT_GENERAL)) return;
-
         Event.dispatch(EVENT_GTM_GENERAL_INIT, {});
 
         this.pushEventData({

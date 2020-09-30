@@ -1,8 +1,4 @@
-import Event, {
-    EVENT_GTM_PRODUCT_DETAIL
-} from '../../util/Event';
-import { EVENT_PRODUCT_DETAIL } from '../../component/GoogleTagManager/GoogleTagManager.component';
-import { isEventEnabled } from '../../util/EventConfig';
+import Event, { EVENT_GTM_PRODUCT_DETAIL } from '../../util/Event';
 
 /** ProductPage */
 const _gtmProductDetail = (instance) => {
@@ -17,8 +13,6 @@ const _gtmProductDetail = (instance) => {
 };
 
 const componentDidMount = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_PRODUCT_DETAIL)) return callback(...args);
-
     const { areDetailsLoaded } = instance.props;
 
     if (areDetailsLoaded) {
@@ -29,8 +23,6 @@ const componentDidMount = (args, callback, instance) => {
 };
 
 const componentDidUpdate = (args, callback, instance) => {
-    if (!isEventEnabled(EVENT_PRODUCT_DETAIL)) return callback(...args);
-
     const [prevProps] = args;
     const shouldTriggerGtm = () => {
         const {

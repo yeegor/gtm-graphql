@@ -14,8 +14,6 @@ import Event, { EVENT_GTM_PURCHASE } from '../../../util/Event';
 import BaseEvent from './BaseEvent.event';
 import { roundPrice } from 'Util/Price';
 import ProductHelper from '../utils';
-import { isEventEnabled } from '../../../util/EventConfig';
-import { EVENT_PURCHASE } from '../GoogleTagManager.component';
 
 export const PURCHASE_EVENT_HANDLE_DELAY = 700;
 export const SPAM_PROTECTION_DELAY = 10000;
@@ -35,8 +33,6 @@ class Purchase extends BaseEvent {
      * Bind on product detail
      */
     bindEvent() {
-        if (!isEventEnabled(EVENT_PURCHASE)) return;
-
         Event.observer(EVENT_GTM_PURCHASE, ({ orderID: orderId, totals }) => {
             this.handle(
                 orderId,
@@ -53,8 +49,6 @@ class Purchase extends BaseEvent {
      * @param cartData
      */
     handler(orderId, totals) {
-        if (!isEventEnabled(EVENT_PURCHASE)) return;
-
         if (this.spamProtection(SPAM_PROTECTION_DELAY)) {
             return;
         }
