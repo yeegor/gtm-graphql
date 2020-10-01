@@ -19,18 +19,18 @@ type Gtm {
 }
 
 type GtmEvents {
-    general: Boolean
-    productImpression: Boolean
-    productClick: Boolean
-    addToCart: Boolean
-    removeFromCart: Boolean
-    productDetail: Boolean
-    purchase: Boolean
-    checkout: Boolean
-    checkoutOption: Boolean
-    userLogin: Boolean
-    userRegister: Boolean
-    notFound: Boolean
-    categoryFilters: Boolean
-    additional: Boolean
+    gtm_general_init: Boolean
+    gtm_impressions: Boolean
+    gtm_product_click: Boolean
+    gtm_product_detail: Boolean
+    gtm_product_add_to_cart: Boolean
+    gtm_product_remove_from_cart: Boolean
+    gtm_purchase: Boolean
+    gtm_checkout: Boolean
+    gtm_checkout_option: Boolean
+    gtm_user_login: Boolean
+    gtm_user_register: Boolean
+    gtm_not_found: Boolean
+    gtm_category_filters: Boolean
+    gtm_additional: Boolean
 }

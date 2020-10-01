@@ -6,7 +6,6 @@ import Event, {
     EVENT_GTM_IMPRESSIONS_SEARCH
 } from '../../util/Event';
 
-import { getQueryParam } from 'Util/Url';
 import { HOME_PAGE, SEARCH } from 'Component/Header/Header.config';
 
 /** MyAccountMyWishlistContainer */
@@ -58,6 +57,30 @@ const ProductLinks_componentDidUpdate = (args, callback, instance) => {
     }
 
     callback(...args);
+};
+
+
+/**
+ * Get query variable value (from react router)
+ * Copied from Util/Url to avoid calling Store util which breaks plugin sequence.
+ * @param {String} variable Variable from URL
+ * @param {Object} variable location object from react-router
+ * @param location
+ * @return {String|boolean} Variable value
+ * @namespace Util/Url/getQueryParam
+ */
+const getQueryParam = (variable, location) => {
+    const query = location.search.substring(1);
+    const vars = query.split('&');
+    // eslint-disable-next-line fp/no-loops
+    for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split('=');
+        if (pair[0] === variable) {
+            return pair[1];
+        }
+    }
+
+    return false;
 };
 
 /** ProductList */

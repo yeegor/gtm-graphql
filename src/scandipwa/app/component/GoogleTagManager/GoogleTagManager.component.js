@@ -28,7 +28,6 @@ import UserRegisterEvent from './events/UserRegister.event';
 import { ONE_MONTH_IN_SECONDS } from 'Util/Request/QueryDispatcher';
 import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import { isEventEnabled } from '../../util/EventConfig';
 
 /**
  * Event list
@@ -321,12 +320,10 @@ class GoogleTagManager extends PureComponent {
                 console.log(event, data);
             }
 
-            if (isEventEnabled(EVENT_GENERAL)) {
-                window[this.currentDataLayerName].push({
-                    event,
-                    ...this.currentDataLayer
-                });
-            }
+            window[this.currentDataLayerName].push({
+                event,
+                ...this.currentDataLayer
+            });
 
             this.currentDataLayer = {};
         }

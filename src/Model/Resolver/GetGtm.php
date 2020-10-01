@@ -56,23 +56,23 @@ class GetGtm implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         return [
-            'enabled' => !!$this->getConfigData('enabled'),
+            'enabled' => (bool)$this->getConfigData('enabled'),
             'gtm_id' => $this->getConfigData('gtm_id'),
             'events' => [
-                'general' => $this->getConfigData('general', 'events'),
-                'productImpression' => $this->getConfigData('productImpression', 'events'),
-                'productClick' => $this->getConfigData('productClick', 'events'),
-                'productDetail' => $this->getConfigData('productDetail', 'events'),
-                'addToCart' => $this->getConfigData('addToCart', 'events'),
-                'removeFromCart' => $this->getConfigData('removeFromCart', 'events'),
-                'checkout' => $this->getConfigData('checkout', 'events'),
-                'checkoutOption' => $this->getConfigData('checkoutOption', 'events'),
-                'purchase' => $this->getConfigData('purchase', 'events'),
-                'userLogin' => $this->getConfigData('userLogin', 'events'),
-                'userRegister' => $this->getConfigData('userRegister', 'events'),
-                'notFound' => $this->getConfigData('notFound', 'events'),
-                'categoryFilters' => $this->getConfigData('categoryFilters', 'events'),
-                'additional' => $this->getConfigData('additional', 'events'),
+                'gtm_general_init' => $this->getConfigData('general', 'events'),
+                'gtm_impressions' => $this->getConfigData('productImpression', 'events'),
+                'gtm_product_click' => $this->getConfigData('productClick', 'events'),
+                'gtm_product_detail' => $this->getConfigData('productDetail', 'events'),
+                'gtm_product_add_to_cart' => $this->getConfigData('addToCart', 'events'),
+                'gtm_product_remove_from_cart' => $this->getConfigData('removeFromCart', 'events'),
+                'gtm_checkout' => $this->getConfigData('checkout', 'events'),
+                'gtm_checkout_option' => $this->getConfigData('checkoutOption', 'events'),
+                'gtm_purchase' => $this->getConfigData('purchase', 'events'),
+                'gtm_user_login' => $this->getConfigData('userLogin', 'events'),
+                'gtm_user_register' => $this->getConfigData('userRegister', 'events'),
+                'gtm_not_found' => $this->getConfigData('notFound', 'events'),
+                'gtm_category_filters' => $this->getConfigData('categoryFilters', 'events'),
+                'gtm_additional' => $this->getConfigData('additional', 'events'),
             ]
         ];
     }

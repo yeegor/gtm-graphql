@@ -16,11 +16,7 @@ export const CONFIRM_ACCOUNT = 'confirm_account';
 
 import withGTM from '../component/GoogleTagManager/withGTM.hoc';
 
-const wrapperFunction = (route) => (args, callback, instance) => {
-    const originalRender = callback.apply(instance, args);
-
-    return withGTM(originalRender, route);
-}
+const wrapperFunction = (route) => (args, callback) => withGTM(callback(...args), route);
 
 export default {
     'Route/HomePage/Container': { 'member-function': { render: wrapperFunction(HOME_PAGE) } },
