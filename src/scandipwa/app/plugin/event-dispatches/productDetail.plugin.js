@@ -1,6 +1,4 @@
-import Event, {
-    EVENT_GTM_PRODUCT_DETAIL,
-} from '../../util/Event';
+import Event, { EVENT_GTM_PRODUCT_DETAIL } from '../../util/Event';
 
 /** ProductPage */
 const _gtmProductDetail = (instance) => {
@@ -12,7 +10,7 @@ const _gtmProductDetail = (instance) => {
             pathname
         });
     }
-}
+};
 
 const componentDidMount = (args, callback, instance) => {
     const { areDetailsLoaded } = instance.props;
@@ -22,7 +20,7 @@ const componentDidMount = (args, callback, instance) => {
     }
 
     return callback(...args);
-}
+};
 
 const componentDidUpdate = (args, callback, instance) => {
     const [prevProps] = args;
@@ -41,7 +39,7 @@ const componentDidUpdate = (args, callback, instance) => {
             (areDetailsLoaded !== prevAreDetailsLoaded)
             || (pathname !== prevPathname)
         );
-    }
+    };
 
 
     if (shouldTriggerGtm()) {
@@ -49,13 +47,13 @@ const componentDidUpdate = (args, callback, instance) => {
     }
 
     return callback(...args);
-}
+};
 
 export default {
     'Route/ProductPage/Component': {
         'member-function': {
             'componentDidMount': componentDidMount,
-            'componentDidUpdate': componentDidUpdate,
+            'componentDidUpdate': componentDidUpdate
         }
     }
 };

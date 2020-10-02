@@ -13,7 +13,7 @@ import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import { roundPrice } from 'Util/Price';
 export const URL_REWRITE = 'url-rewrite';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import { MyAccountDispatcher } from 'Store/MyAccount';
+import MyAccountDispatcher from 'Store/MyAccount/MyAccount.dispatcher';
 import ProductHelper from '../utils';
 
 export const DATA_RECHECK_TIMEOUT = 1500;

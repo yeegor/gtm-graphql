@@ -12,6 +12,7 @@
 
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
 import General from './events/General.event';
 import Scripts from './Scripts';
 import Impression from './events/Impression.event';
@@ -26,7 +27,6 @@ import UserLoginEvent from './events/UserLogin.event';
 import UserRegisterEvent from './events/UserRegister.event';
 import { ONE_MONTH_IN_SECONDS } from 'Util/Request/QueryDispatcher';
 import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
-
 import BrowserDatabase from 'Util/BrowserDatabase';
 
 /**
@@ -43,6 +43,9 @@ export const EVENT_CHECKOUT = 'checkout';
 export const EVENT_CHECKOUT_OPTION = 'checkoutOption';
 export const EVENT_USER_REGISTER = 'userRegister';
 export const EVENT_USER_LOGIN = 'userLogin';
+export const EVENT_NOT_FOUND = 'notFound';
+export const EVENT_CATEGORY_FILTERS = 'categoryFilters';
+export const EVENT_ADDITIONAL = 'additional';
 
 /**
  * Const
@@ -77,6 +80,7 @@ class GoogleTagManager extends PureComponent {
     /**
      * Event list used in GTM
      * All used events should be registered in this data mapping
+     * TODO: 404 page, categoryFilter, additional events
      *
      * @type {{[p: string]: General|Purchase|CheckoutEvent|OrderData|Impression|AddToCartEvent|ProductClickEvent|ProductDetail|CheckoutOptionEvent|RemoveFromCartEvent}}
      */

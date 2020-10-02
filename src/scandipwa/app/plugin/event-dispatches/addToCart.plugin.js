@@ -1,8 +1,19 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
+
 import Event, {
     EVENT_GTM_PRODUCT_ADD_TO_CART
 } from '../../util/Event';
 
-const around_afterAdded = (args, callback, instance) => {
+const aroundAfterAddToCart = (args, callback, instance) => {
     const {
         product,
         product: { type_id, variants },
@@ -32,12 +43,12 @@ const around_afterAdded = (args, callback, instance) => {
     }
 
     return callback(...args);
-}
+};
 
 export default {
     'Component/AddToCart/Container': {
         'member-function': {
-            '_afterAdded': around_afterAdded
+            'afterAddToCart': aroundAfterAddToCart
         }
     }
-}
+};

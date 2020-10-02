@@ -4,10 +4,6 @@ import Event, {
 } from '../../util/Event';
 
 class QuantityChangePlugin {
-    /*
-        handleChangeState = {};
-    */
-
     handleChangeQuantity = (args, callback, instance) => {
         const [quantity] = args;
         const { item, item: { qty } } = instance.props;
@@ -19,7 +15,7 @@ class QuantityChangePlugin {
         };
 
         callback(...args);
-    }
+    };
 
     changeItemQty = (args, callback, instance) => {
         const { newQuantity, item, oldQuantity } = this.handleChangeState;
@@ -41,10 +37,10 @@ class QuantityChangePlugin {
                         });
                     }
 
-                    return result
+                    return result;
                 }
             );
-    }
+    };
 }
 
 const {
@@ -63,4 +59,4 @@ export default {
             'changeItemQty': changeItemQty
         }
     }
-}
+};

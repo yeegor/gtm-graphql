@@ -1,7 +1,8 @@
 import { UPDATE_CONFIG } from 'Store/Config/Config.action';
-import { ConfigQuery } from 'Query';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import GoogleTagManager from '../component/GoogleTagManager/GoogleTagManager.component';
+import GoogleTagManager, { GROUPED_PRODUCTS_GUEST } from '../component/GoogleTagManager/GoogleTagManager.component';
+import GtmQuery from '../query/Gtm.query';
+import ProductHelper from '../component/GoogleTagManager/utils/Product';
 
 const handle_syncCartWithBEError = (args, callback, instance) => {
     return callback(...args)
@@ -10,13 +11,16 @@ const handle_syncCartWithBEError = (args, callback, instance) => {
                 GoogleTagManager.getInstance().setGroupedProducts({});
                 return result;
             }
-        )
-}
+        );
+};
 
-const addGtmConfigQuery = (args, callback, instance) => ([
-    ...callback(...args),
-    ConfigQuery.getGTMConfiguration()
-]);
+const addGtmConfigQuery = (args, callback, instance) => {
+    const original = callback(...args);
+    return [
+        ...(Array.isArray(original) ? original : [original]),
+        GtmQuery.getGTMConfiguration()
+    ];
+};
 
 const addGtmToConfigReducerInitialState = (args, callback, instance) => {
     const { gtm } = BrowserDatabase.getItem('config') || { gtm: {} };
@@ -24,13 +28,18 @@ const addGtmToConfigReducerInitialState = (args, callback, instance) => {
     return {
         ...callback(...args),
         gtm
-    }
-}
+    };
+};
 
 const addGtmToConfigUpdate = (args, callback, context) => {
-    const [state, action] = args;
-    const { config: { gtm } = {}, type } = action;
+    const [, action] = args;
     const originalUpdatedState = callback.apply(context, args);
+
+    if (!action) {
+        return originalUpdatedState;
+    }
+
+    const { config: { gtm } = {}, type } = action;
 
     if (type !== UPDATE_CONFIG) {
         return originalUpdatedState;
@@ -39,8 +48,8 @@ const addGtmToConfigUpdate = (args, callback, context) => {
     return {
         ...originalUpdatedState,
         gtm
-    }
-}
+    };
+};
 
 const afterRequestCustomerData = (args, callback, instance) => {
     const gtm = GoogleTagManager.getInstance();
@@ -59,7 +68,7 @@ const afterRequestCustomerData = (args, callback, instance) => {
         const result = ProductHelper.mergeGroupedProducts(guestGroupedProducts, userGroupedProducts);
 
         gtm.setGroupedProducts(result);
-    }
+    };
 
     return callback(...args)
         .then(result => {
@@ -67,8 +76,8 @@ const afterRequestCustomerData = (args, callback, instance) => {
             gtm.updateGroupedProductsStorageName(customer.id);
 
             return result;
-        })
-}
+        });
+};
 
 export default {
     'Store/Cart/Dispatcher': {

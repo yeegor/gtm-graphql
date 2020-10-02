@@ -4,6 +4,7 @@
 # * @category    ScandiPWA
 # * @package     ScandiPWA_GtmGraphQl
 # * @author      Rihards Stasans <info@scandiweb.com>
+# * @author      Deniss Dubinins <denissd@scandiweb.com | info@scandiweb.com>
 # * @copyright   Copyright (c) 2019 Scandiweb, Ltd (https://scandiweb.com)
 # */
 
@@ -14,4 +15,22 @@ type Query {
 type Gtm {
     enabled: Boolean
     gtm_id: String
+    events: GtmEvents
+}
+
+type GtmEvents {
+    gtm_general_init: Boolean
+    gtm_impressions: Boolean
+    gtm_product_click: Boolean
+    gtm_product_detail: Boolean
+    gtm_product_add_to_cart: Boolean
+    gtm_product_remove_from_cart: Boolean
+    gtm_purchase: Boolean
+    gtm_checkout: Boolean
+    gtm_checkout_option: Boolean
+    gtm_user_login: Boolean
+    gtm_user_register: Boolean
+    gtm_not_found: Boolean
+    gtm_category_filters: Boolean
+    gtm_additional: Boolean
 }

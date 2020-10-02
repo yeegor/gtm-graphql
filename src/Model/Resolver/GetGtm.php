@@ -17,8 +17,6 @@ use Magento\Framework\GraphQl\Query\Resolver\Value;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Store\Model\ScopeInterface;
-use ScandiPWA\Gtm\Model\Config\Source\ElementType;
-use ScandiPWA\Gtm\Model\Config\Source\Type;
 
 /**
  * Class GetGtm
@@ -39,7 +37,8 @@ class GetGtm implements ResolverInterface
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig
-    ) {
+    )
+    {
         $this->scopeConfig = $scopeConfig;
     }
 
@@ -57,8 +56,24 @@ class GetGtm implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         return [
-            'enabled' => !!$this->getConfigData('enabled'),
-            'gtm_id' => $this->getConfigData('gtm_id')
+            'enabled' => (bool)$this->getConfigData('enabled'),
+            'gtm_id' => $this->getConfigData('gtm_id'),
+            'events' => [
+                'gtm_general_init' => $this->getConfigData('general', 'events'),
+                'gtm_impressions' => $this->getConfigData('productImpression', 'events'),
+                'gtm_product_click' => $this->getConfigData('productClick', 'events'),
+                'gtm_product_detail' => $this->getConfigData('productDetail', 'events'),
+                'gtm_product_add_to_cart' => $this->getConfigData('addToCart', 'events'),
+                'gtm_product_remove_from_cart' => $this->getConfigData('removeFromCart', 'events'),
+                'gtm_checkout' => $this->getConfigData('checkout', 'events'),
+                'gtm_checkout_option' => $this->getConfigData('checkoutOption', 'events'),
+                'gtm_purchase' => $this->getConfigData('purchase', 'events'),
+                'gtm_user_login' => $this->getConfigData('userLogin', 'events'),
+                'gtm_user_register' => $this->getConfigData('userRegister', 'events'),
+                'gtm_not_found' => $this->getConfigData('notFound', 'events'),
+                'gtm_category_filters' => $this->getConfigData('categoryFilters', 'events'),
+                'gtm_additional' => $this->getConfigData('additional', 'events'),
+            ]
         ];
     }
 

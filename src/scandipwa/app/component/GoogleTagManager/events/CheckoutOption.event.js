@@ -17,7 +17,6 @@ export const CHECKOUT_OPTIONS_EVENT_DELAY = 500;
 export const EVENT_TIMEOUT_ON_LOAD = 1000;
 export const SPAM_PROTECTION_DELAY = 100;
 
-
 /**
  * On checkout
  */

@@ -1,6 +1,4 @@
-import Event, {
-    EVENT_GTM_PURCHASE,
-} from '../../util/Event';
+import Event, { EVENT_GTM_PURCHASE } from '../../util/Event';
 
 const setDetailsStep = (args, callback, instance) => {
     const [orderID] = args;
@@ -15,7 +13,7 @@ const setDetailsStep = (args, callback, instance) => {
     );
 
     return callback(...args);
-}
+};
 
 export default {
     'Route/Checkout/Container': {
@@ -23,4 +21,4 @@ export default {
             'setDetailsStep': setDetailsStep
         }
     }
-}
+};

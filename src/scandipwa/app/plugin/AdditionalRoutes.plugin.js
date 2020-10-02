@@ -1,5 +1,5 @@
 import GoogleTagManager from '../component/GoogleTagManager';
-import { BEFORE_ITEMS_TYPE } from 'Component/Router/Router.component';
+import { BEFORE_ITEMS_TYPE } from 'Component/Router/Router.config';
 
 const addGtmComponent = (member, context) => {
     const maxPosition = Math.max(

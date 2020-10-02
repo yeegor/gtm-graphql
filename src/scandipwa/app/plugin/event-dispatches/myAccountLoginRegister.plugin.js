@@ -1,6 +1,6 @@
 import Event, {
     EVENT_GTM_USER_REGISTER,
-    EVENT_GTM_USER_LOGIN,
+    EVENT_GTM_USER_LOGIN
 } from '../../util/Event';
 
 const createAccount = (args, callback, instance) => {
@@ -9,8 +9,8 @@ const createAccount = (args, callback, instance) => {
             Event.dispatch(EVENT_GTM_USER_REGISTER);
 
             return signInPromise;
-        })
-}
+        });
+};
 
 const signIn = (args, callback, instance) => {
     return callback(...args)
@@ -18,8 +18,8 @@ const signIn = (args, callback, instance) => {
             Event.dispatch(EVENT_GTM_USER_LOGIN);
 
             return result;
-        })
-}
+        });
+};
 
 export default {
     'Store/MyAccount/Dispatcher': {

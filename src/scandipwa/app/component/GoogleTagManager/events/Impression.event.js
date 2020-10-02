@@ -10,8 +10,12 @@
  */
 
 import Event, {
-    EVENT_GTM_IMPRESSIONS_SEARCH, EVENT_GTM_IMPRESSIONS_HOME, EVENT_GTM_IMPRESSIONS_CROSS_SELL,
-    EVENT_GTM_IMPRESSIONS_PLP, EVENT_GTM_IMPRESSIONS_WISHLIST, EVENT_GTM_IMPRESSIONS_LINKED,
+    EVENT_GTM_IMPRESSIONS_SEARCH,
+    EVENT_GTM_IMPRESSIONS_HOME,
+    EVENT_GTM_IMPRESSIONS_CROSS_SELL,
+    EVENT_GTM_IMPRESSIONS_PLP,
+    EVENT_GTM_IMPRESSIONS_WISHLIST,
+    EVENT_GTM_IMPRESSIONS_LINKED,
     EVENT_GTM_GENERAL_INIT
 } from '../../../util/Event';
 
@@ -84,11 +88,12 @@ class Impression extends BaseEvent {
             this.handle(SEARCH_IMPRESSIONS, items);
         });
 
-        // Recomended
+        // Recommended
         Event.observer(EVENT_GTM_IMPRESSIONS_LINKED, ({ items }) => {
             this.handle(RECOMMENDED_IMPRESSIONS, items);
         });
 
+        // General
         Event.observer(EVENT_GTM_GENERAL_INIT, () => {
             this.cleanStorage();
         });
@@ -108,7 +113,7 @@ class Impression extends BaseEvent {
 
         if (!impressions
             || Object.values(impressions).length === 0
-            || this.spamProtection(SPAM_PROTECTION_DELAY, `${productCollectionType}_${impressionUID}`)
+            || this.spamProtection(SPAM_PROTECTION_DELAY, `${ productCollectionType }_${ impressionUID }`)
         ) {
             return;
         }
@@ -177,15 +182,15 @@ class Impression extends BaseEvent {
      */
     getProductCollection(productCollectionType = PLP_IMPRESSIONS, products) {
         switch (productCollectionType) {
-        case PLP_IMPRESSIONS:
-        case WISHLIST_IMPRESSIONS:
-        case HOME_IMPRESSIONS:
-        case SEARCH_IMPRESSIONS:
-        case RECOMMENDED_IMPRESSIONS:
-        case CHECKOUT_CROSS_SELL_IMPRESSIONS:
-            return products || [];
-        default:
-            return [];
+            case PLP_IMPRESSIONS:
+            case WISHLIST_IMPRESSIONS:
+            case HOME_IMPRESSIONS:
+            case SEARCH_IMPRESSIONS:
+            case RECOMMENDED_IMPRESSIONS:
+            case CHECKOUT_CROSS_SELL_IMPRESSIONS:
+                return products || [];
+            default:
+                return [];
         }
     }
 
@@ -199,22 +204,22 @@ class Impression extends BaseEvent {
      */
     getProductCollectionList(productCollectionType = PLP_IMPRESSIONS, product, categoryName = '') {
         switch (productCollectionType) {
-        case HOME_IMPRESSIONS:
-            return 'Homepage';
-        case RECOMMENDED_IMPRESSIONS:
-            return 'Recommended';
-        case SEARCH_IMPRESSIONS:
-            return 'Search results';
-        case WISHLIST_IMPRESSIONS:
-            return 'Wishlist';
-        case CHECKOUT_CROSS_SELL_IMPRESSIONS:
-            return 'Cross sell impressions';
-        case PLP_IMPRESSIONS:
-            return categoryName
-                ? `PLP - ${ categoryName }`
-                : 'PLP';
-        default:
-            return ProductHelper.getList(product);
+            case HOME_IMPRESSIONS:
+                return 'Homepage';
+            case RECOMMENDED_IMPRESSIONS:
+                return 'Recommended';
+            case SEARCH_IMPRESSIONS:
+                return 'Search results';
+            case WISHLIST_IMPRESSIONS:
+                return 'Wishlist';
+            case CHECKOUT_CROSS_SELL_IMPRESSIONS:
+                return 'Cross sell impressions';
+            case PLP_IMPRESSIONS:
+                return categoryName
+                    ? `PLP - ${ categoryName }`
+                    : 'PLP';
+            default:
+                return ProductHelper.getList(product);
         }
     }
 
@@ -225,7 +230,7 @@ class Impression extends BaseEvent {
      * @return {string}
      */
     getImpressionUID(impression = []) {
-        return impression.reduce((acc, { id }) => `${acc}_${id}`, '');
+        return impression.reduce((acc, { id }) => `${ acc }_${ id }`, '');
     }
 }
 

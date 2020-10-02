@@ -4,10 +4,6 @@ import Event, {
 
 // TODO split
 class RemoveItemPlugin {
-    /*
-        handleRemoveState = {};
-    */
-
     handleRemoveItem = (args, callback, instance) => {
         callback(...args);
         const { item } = instance.props;
@@ -16,8 +12,8 @@ class RemoveItemPlugin {
         this.handleRemoveState = {
             item,
             quantity
-        }
-    }
+        };
+    };
 
     removeProductFromCart = (args, callback, instance) => {
         const { item, quantity } = this.handleRemoveState;
@@ -33,7 +29,7 @@ class RemoveItemPlugin {
                     return result;
                 }
             );
-    }
+    };
 }
 
 const {

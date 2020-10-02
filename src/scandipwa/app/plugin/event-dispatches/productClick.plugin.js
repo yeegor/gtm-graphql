@@ -24,12 +24,13 @@ const ProductCard_renderCardWrapper = (args, callback, instance) => {
     };
 
     const originalLink = callback(...args);
+
     return cloneElement(
         originalLink,
         { onClick: handleClick },
         children
-    )
-}
+    );
+};
 
 export default {
     'Component/ProductCard/Component': {
@@ -37,4 +38,4 @@ export default {
             'renderCardWrapper': ProductCard_renderCardWrapper
         }
     }
-}
+};

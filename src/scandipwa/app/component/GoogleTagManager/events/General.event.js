@@ -12,6 +12,7 @@
 
 import Event, { EVENT_GTM_META_UPDATE, EVENT_GTM_GENERAL_INIT } from '../../../util/Event';
 import BaseEvent from './BaseEvent.event';
+import { isEventEnabled } from '../../../util/EventConfig';
 
 export const GENERAL_EVENT_DELAY = 500;
 
@@ -94,6 +95,10 @@ class General extends BaseEvent {
     handler() {
         Event.dispatch(EVENT_GTM_GENERAL_INIT, {});
 
+        if (!isEventEnabled(EVENT_GTM_GENERAL_INIT)) {
+            return;
+        }
+
         this.pushEventData({
             country: this.getCountryName(),
             pageType: this.getPageType(),
@@ -114,8 +119,7 @@ class General extends BaseEvent {
     }
 
     /**
-     *
-     * @param {} item
+     * @param {*} item
      */
     getQuantity({ qty }) {
         return qty;

@@ -9,6 +9,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
+import { isEventEnabled } from '../EventConfig';
+
 /**
  * Event utility
  *
@@ -25,6 +27,10 @@ class Event {
      * @return {boolean}
      */
     static dispatch(name, data = {}) {
+        if (!isEventEnabled(name)) {
+            return false;
+        }
+
         window.dispatchEvent(new CustomEvent(name, { detail: data }));
 
         return true;
@@ -40,7 +46,7 @@ class Event {
      * @return {function|boolean}
      */
     static observer(name, callback) {
-        if (callback && typeof callback === 'function') {
+        if (callback && typeof callback === 'function' && isEventEnabled(name)) {
             const callbackWrapper = ({ detail: data }) => { callback.call(this, data); };
 
             window.addEventListener(name, callbackWrapper, false);
@@ -60,6 +66,10 @@ class Event {
      * @return {boolean}
      */
     static removeObserver(name, listener) {
+        if (!isEventEnabled(name)) {
+            return false;
+        }
+
         window.removeEventListener(name, listener, false);
 
         return true;
