@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  * @category  ScandiPWA
+  * @package   ScandiPWA\GtmGraphQl
+  * @author    Deniss Dubinins <denissd@scandiweb.com | info@scandiweb.com>
+  * @copyright Copyright (c) 2020 Scandiweb, Inc (https://scandiweb.com)
+  * @license   http://opensource.org/licenses/OSL-3.0 The Open Software License 3.0 (OSL-3.0)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="locale" xsi:type="string">general/locale/code</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="ScandiPWA\CustomerGraphQl\Model\Customer\ExtractCustomerData">
+        <plugin name="GtmExtractCustomerDataPlugin" type="ScandiPWA\GtmGraphQl\Plugin\ExtractCustomerDataPlugin" />
+    </type>
+</config>

@@ -45,10 +45,47 @@ const aroundAfterAddToCart = (args, callback, instance) => {
     return callback(...args);
 };
 
+const aroundAddItemToCart = (args, callback, instance) => {
+    const {
+        product,
+        product: { type_id, variants },
+        quantity,
+        configurableVariantIndex,
+        groupedProductQuantity
+    } = instance.props;
+
+    return callback(...args).then(() => {
+        if (type_id === 'grouped') {
+            Event.dispatch(EVENT_GTM_PRODUCT_ADD_TO_CART, {
+                product: {
+                    ...product,
+                    quantities: groupedProductQuantity
+                },
+                isGrouped: true
+            });
+        } else {
+            const productToAdd = variants
+                ? { ...product, configurableVariantIndex }
+                : product;
+
+            Event.dispatch(EVENT_GTM_PRODUCT_ADD_TO_CART, {
+                product: productToAdd,
+                quantity,
+                configurableVariantIndex
+            });
+        }
+    });
+}
+
 export default {
     'Component/AddToCart/Container': {
         'member-function': {
             'afterAddToCart': aroundAfterAddToCart
+        }
+    },
+    'Component/WishlistItem/Container': {
+        'member-function': {
+            addItemToCart: aroundAddItemToCart
         }
     }
 };

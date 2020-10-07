@@ -11,6 +11,10 @@
 
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+
+import { CHECKOUT } from 'Component/Header/Header.config';
+import { THANK_YOU } from '../../plugin/GTMHocWrapper.plugin';
 
 class GoogleTagManagerRouteWrapper extends PureComponent {
     static propTypes = {
@@ -28,6 +32,15 @@ class GoogleTagManagerRouteWrapper extends PureComponent {
         window.currentRouteName = route;
     }
 
+    componentDidUpdate(prevProps) {
+        const { route } = prevProps;
+        const { location: { pathname } } = this.props;
+
+        if (route === CHECKOUT && /[^/]*$/.exec(pathname)[0] === 'success') {
+            window.currentRouteName = THANK_YOU;
+        }
+    }
+
     render() {
         const { children } = this.props;
 
@@ -35,4 +48,4 @@ class GoogleTagManagerRouteWrapper extends PureComponent {
     }
 }
 
-export default GoogleTagManagerRouteWrapper;
+export default withRouter(GoogleTagManagerRouteWrapper);

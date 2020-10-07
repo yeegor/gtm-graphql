@@ -65,11 +65,20 @@ export default class Product {
         return attribute_value;
     }
 
+    /**
+     * @param product
+     * @returns {*|number|bigint}
+     */
     static getSelectedVariant(product) {
         const { sku, variants } = product;
         return variants.find(({ sku: variantSku }) => sku === variantSku);
     }
 
+    /**
+     * @param product
+     * @param sku
+     * @returns {number}
+     */
     static getSelectedVariantIndex(product, sku) {
         const { variants = [] } = product;
         return variants.findIndex(({ sku: variantSku = '' }) => sku === variantSku);
@@ -84,6 +93,7 @@ export default class Product {
     static getSku(product) {
         const { variants = [], configurableVariantIndex = -1 } = product;
         const { sku = '' } = variants[configurableVariantIndex] || product;
+
         return sku;
     }
 
@@ -91,7 +101,7 @@ export default class Product {
      * Get item data as object
      *
      *
-     * @return {{quantity: number, price: number, name: string, variant: string, id: string, availability: boolean, list: string, category: string, brand: string}}
+     * @returns {{}|{quantity: number, price: number, name: string, variant: string, id: string, availability: boolean, list: string, category: string, brand: string}}
      * @param item
      * @param isVariantPassed
      */
@@ -106,21 +116,29 @@ export default class Product {
         return {};
     }
 
+    /**
+     * @param categories
+     * @returns {string}
+     */
     static getCategory(categories = []) {
-        const { url_path = '' } = categories.slice(-1)[0] || {};
-        return url_path;
+        return categories.slice(0, 5).map(({ name }) => name).join('/');
     }
 
+    /**
+     * @param variant
+     * @param type_id
+     * @returns {number}
+     */
     static getPrice(variant, type_id) {
         const {
-            price: {
-                minimalPrice: {
-                    amount: {
+            price_range: {
+                minimum_price: {
+                    final_price: {
                         value: discountValue = null
                     } = {}
                 } = {},
-                regularPrice: {
-                    amount: {
+                regular_price: {
+                    final_price: {
                         value = 0
                     } = {}
                 } = {}
@@ -156,10 +174,19 @@ export default class Product {
         GTMInstance.setGroupedProducts(groupedProducts);
     }
 
+    /**
+     * @param items
+     * @returns {*}
+     */
     static getArrayOfGroupedProductChildrenSku(items) {
         return items.reduce((acc, { product: { sku } }) => [...acc, sku], []);
     }
 
+    /**
+     * @param childSku
+     * @param price
+     * @returns {null|*}
+     */
     static updateGroupedProduct(childSku, price) {
         const GTMInstance = GoogleTagManager.getInstance();
         const groupedProducts = GTMInstance.getGroupedProducts();
@@ -188,6 +215,11 @@ export default class Product {
         return null;
     }
 
+    /**
+     * @param groupedProducts1
+     * @param groupedProducts2
+     * @returns {*}
+     */
     static mergeGroupedProducts(groupedProducts1, groupedProducts2) {
         if (!groupedProducts1) return groupedProducts2;
         if (!groupedProducts2) return groupedProducts1;
@@ -212,18 +244,27 @@ export default class Product {
      * dimension3: variantSKU
      * metric1: total for grouped product
      */
-
     static getVariantSku(sku, variantSku, isVariantPassed) {
         return (variantSku === sku && !isVariantPassed)
             ? NOT_APPLICABLE
             : variantSku;
     }
 
+    /**
+     * @param product
+     * @returns {number}
+     */
     static getGroupedProductPrice(product) {
         const { groupedProductPrice = 0 } = product;
         return groupedProductPrice;
     }
 
+    /**
+     * @param variant
+     * @param parentAttributes
+     * @param attributeName
+     * @returns {string}
+     */
     static getAttribute(variant, parentAttributes, attributeName) {
         const { attribute_value = '' } = variant.attributes[attributeName] || {};
         const { attribute_options = {} } = parentAttributes[attributeName] || {};

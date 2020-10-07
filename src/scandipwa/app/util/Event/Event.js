@@ -11,6 +11,8 @@
 
 import { isEventEnabled } from '../EventConfig';
 
+const EVENT_CHECK_TIMEOUT = 1000;
+
 /**
  * Event utility
  *
@@ -18,6 +20,13 @@ import { isEventEnabled } from '../EventConfig';
  * For React internal data flows use react specified data flows architecture
  */
 class Event {
+    /**
+     * Array of events that are already initialized.
+     * Used for dispatchers that are triggered before observers are initialized
+     * @type {[]}
+     */
+    static initializedEvents = [];
+
     /**
      * Dispatch global event
      *
@@ -27,6 +36,12 @@ class Event {
      * @return {boolean}
      */
     static dispatch(name, data = {}) {
+        if (!this.initializedEvents[name]) {
+            setTimeout(() => this.dispatch(name, data), EVENT_CHECK_TIMEOUT);
+
+            return false;
+        }
+
         if (!isEventEnabled(name)) {
             return false;
         }
@@ -46,6 +61,10 @@ class Event {
      * @return {function|boolean}
      */
     static observer(name, callback) {
+        if (!this.initializedEvents[name]) {
+            this.initializedEvents[name] = true;
+        }
+
         if (callback && typeof callback === 'function' && isEventEnabled(name)) {
             const callbackWrapper = ({ detail: data }) => { callback.call(this, data); };
 
