@@ -1,3 +1,15 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @author Deniss Dubinins <denissd@scandiweb.com | info@scandiweb.com>
+ * @link https://github.com/scandipwa/base-theme
+ */
+
 import { UPDATE_CONFIG } from 'Store/Config/Config.action';
 import BrowserDatabase from 'Util/BrowserDatabase';
 import GoogleTagManager, { GROUPED_PRODUCTS_GUEST } from '../component/GoogleTagManager/GoogleTagManager.component';
@@ -72,8 +84,13 @@ const afterRequestCustomerData = (args, callback, instance) => {
 
     return callback(...args)
         .then(result => {
-            transferGroupedProductsData(customer.id);
-            gtm.updateGroupedProductsStorageName(customer.id);
+            const CUSTOMER = 'customer';
+            const customer = BrowserDatabase.getItem(CUSTOMER);
+
+            if (gtm) {
+                transferGroupedProductsData(customer.id);
+                gtm.updateGroupedProductsStorageName(customer.id);
+            }
 
             return result;
         });

@@ -25,6 +25,7 @@ import CheckoutEvent from './events/Checkout.event';
 import CheckoutOptionEvent from './events/CheckoutOption.event';
 import UserLoginEvent from './events/UserLogin.event';
 import UserRegisterEvent from './events/UserRegister.event';
+import NotFoundEvent from './events/NotFound.event';
 import { ONE_MONTH_IN_SECONDS } from 'Util/Request/QueryDispatcher';
 import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import BrowserDatabase from 'Util/BrowserDatabase';
@@ -43,7 +44,7 @@ export const EVENT_CHECKOUT = 'checkout';
 export const EVENT_CHECKOUT_OPTION = 'checkoutOption';
 export const EVENT_USER_REGISTER = 'userRegister';
 export const EVENT_USER_LOGIN = 'userLogin';
-export const EVENT_NOT_FOUND = 'notFound';
+export const EVENT_NOT_FOUND = 'GAevent';
 export const EVENT_CATEGORY_FILTERS = 'categoryFilters';
 export const EVENT_ADDITIONAL = 'additional';
 
@@ -95,7 +96,8 @@ class GoogleTagManager extends PureComponent {
         [EVENT_PRODUCT_DETAIL]: ProductDetailEvent,
         [EVENT_REMOVE_FROM_CART]: RemoveFromCartEvent,
         [EVENT_USER_REGISTER]: UserRegisterEvent,
-        [EVENT_USER_LOGIN]: UserLoginEvent
+        [EVENT_USER_LOGIN]: UserLoginEvent,
+        [EVENT_NOT_FOUND]: NotFoundEvent
     };
 
     /**

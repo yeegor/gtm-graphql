@@ -4,7 +4,7 @@ import Event, { EVENT_GTM_PRODUCT_DETAIL } from '../../util/Event';
 const _gtmProductDetail = (instance) => {
     const { product, location: { pathname }, configurableVariantIndex } = instance.props;
 
-    if (product && product.price && product.attributes) {
+    if (product && product.price_range.minimum_price && product.attributes) {
         Event.dispatch(EVENT_GTM_PRODUCT_DETAIL, {
             product: { ...product, configurableVariantIndex },
             pathname
