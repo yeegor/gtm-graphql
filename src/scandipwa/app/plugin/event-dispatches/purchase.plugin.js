@@ -13,7 +13,7 @@ const setDetailsStep = (args, callback, instance) => {
     );
 
     return callback(...args);
-}
+};
 
 export default {
     'Route/Checkout/Container': {
