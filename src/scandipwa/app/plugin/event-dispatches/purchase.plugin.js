@@ -1,7 +1,7 @@
 import Event, { EVENT_GTM_PURCHASE } from '../../util/Event';
 
 const setDetailsStep = (args, callback, instance) => {
-    const [orderID] = args;
+    const [orderID, transactionID] = args;
     const {
         totals: { items = [] }
     } = instance.props;
@@ -9,11 +9,11 @@ const setDetailsStep = (args, callback, instance) => {
 
     Event.dispatch(
         EVENT_GTM_PURCHASE,
-        { orderID, totals: { ...totals, items } }
+        { orderID, transactionID: transactionID, totals: { ...totals, items } }
     );
 
     return callback(...args);
-};
+}
 
 export default {
     'Route/Checkout/Container': {
