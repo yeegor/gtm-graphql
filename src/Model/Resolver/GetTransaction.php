@@ -83,10 +83,10 @@ class GetTransaction implements ResolverInterface
         array $value = null,
         array $args = null
     ) {
-        if (!isset($args['order_id'])) {
+        if (!isset($value['order_id'])) {
             throw new GraphQlInputException('Missing order ID');
         }
 
-        return $this->getTransactionIdByOrderId($args['order_id']);
+        return $this->getTransactionIdByOrderId($value['order_id']);
     }
 }
