@@ -12,6 +12,10 @@ type Query {
     getGtm: Gtm @resolver(class:"\\ScandiPWA\\GtmGraphQl\\Model\\Resolver\\GetGtm")
 }
 
+type Order {
+    transaction_id: String @resolver(class: "\\ScandiPWA\\GtmGraphQl\\Model\\Resolver\\GetTransaction")
+}
+
 type Gtm {
     enabled: Boolean
     gtm_id: String
