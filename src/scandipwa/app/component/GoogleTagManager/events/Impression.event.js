@@ -42,7 +42,7 @@ export const RECOMMENDED_IMPRESSIONS = 'recommended';
  */
 export const SPAM_PROTECTION_DELAY = 2000;
 export const PRODUCT_IMPRESSION_COUNT = 36;
-export const PRODUCT_IMPRESSION_CHUNK_SIZE = 4;
+export const PRODUCT_IMPRESSION_CHUNK_SIZE = 12;
 export const EVENT_HANDLE_DELAY = 700;
 
 /**
