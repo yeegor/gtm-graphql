@@ -9,12 +9,13 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
-import { roundPrice } from 'Util/Price';
-export const URL_REWRITE = 'url-rewrite';
+import MyAccountDispatcher, { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import MyAccountDispatcher from 'Store/MyAccount/MyAccount.dispatcher';
+import { roundPrice } from 'Util/Price';
+
 import ProductHelper from '../utils';
+
+export const URL_REWRITE = 'url-rewrite';
 
 export const DATA_RECHECK_TIMEOUT = 1500;
 export const EVENT_HANDLE_DELAY = 1500;
@@ -22,7 +23,7 @@ export const EVENT_HANDLE_DELAY = 1500;
 /**
  * Base event for GTM PWA events
  */
-class BaseEvent {
+export class BaseEvent {
     /**
      *
      * @type {GoogleTagManager}
@@ -342,7 +343,7 @@ class BaseEvent {
         } = this.getCartProductData();
 
         const itemsData = items
-            .map(item => ({
+            .map((item) => ({
                 ...ProductHelper.getItemData(item),
                 quantity: ProductHelper.getQuantity(item)
             }));

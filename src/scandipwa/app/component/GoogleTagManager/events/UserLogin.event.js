@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_USER_LOGIN } from '../../../util/Event';
+import Event, { EVENT_GTM_USER_LOGIN } from 'Util/Event';
+
 import BaseEvent from './BaseEvent.event';
 
 export const USER_LOGIN_EVENT_DELAY = 500;
@@ -19,7 +20,7 @@ export const SPAM_PROTECTION_DELAY = 100;
 /**
  * On checkout
  */
-export default class UserLoginEvent extends BaseEvent {
+export class UserLoginEvent extends BaseEvent {
     /**
      * Event fire delay
      *
@@ -51,3 +52,5 @@ export default class UserLoginEvent extends BaseEvent {
         this.pushEventData({});
     }
 }
+
+export default UserLoginEvent;

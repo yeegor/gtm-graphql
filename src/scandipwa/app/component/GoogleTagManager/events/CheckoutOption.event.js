@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_CHECKOUT_OPTION } from '../../../util/Event';
+import Event, { EVENT_GTM_CHECKOUT_OPTION } from 'Util/Event';
+
 import BaseEvent from './BaseEvent.event';
 
 export const CHECKOUT_OPTIONS_EVENT_DELAY = 500;
@@ -20,7 +21,7 @@ export const SPAM_PROTECTION_DELAY = 100;
 /**
  * On checkout
  */
-export default class CheckoutOptionEvent extends BaseEvent {
+export class CheckoutOptionEvent extends BaseEvent {
     /**
      * Event fire delay
      *
@@ -58,3 +59,5 @@ export default class CheckoutOptionEvent extends BaseEvent {
         });
     }
 }
+
+export default CheckoutOptionEvent;

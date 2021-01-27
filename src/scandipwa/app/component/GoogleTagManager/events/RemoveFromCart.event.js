@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_PRODUCT_REMOVE_FROM_CART } from '../../../util/Event';
+import Event, { EVENT_GTM_PRODUCT_REMOVE_FROM_CART } from 'Util/Event';
+
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
 
@@ -18,7 +19,7 @@ export const SPAM_PROTECTION_DELAY = 200;
 /**
  * Product add to cart event
  */
-class RemoveFromCartEvent extends BaseEvent {
+export class RemoveFromCartEvent extends BaseEvent {
     /**
      * Bind add to cart
      */

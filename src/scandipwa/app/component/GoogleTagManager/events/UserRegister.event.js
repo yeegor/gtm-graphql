@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_USER_REGISTER } from '../../../util/Event';
+import Event, { EVENT_GTM_USER_REGISTER } from 'Util/Event';
+
 import BaseEvent from './BaseEvent.event';
 
 export const USER_REGISTRATION_EVENT_DELAY = 500;
@@ -19,7 +20,7 @@ export const SPAM_PROTECTION_DELAY = 100;
 /**
  * On checkout
  */
-export default class UserRegistrationEvent extends BaseEvent {
+export class UserRegistrationEvent extends BaseEvent {
     /**
      * Event fire delay
      *
@@ -51,3 +52,5 @@ export default class UserRegistrationEvent extends BaseEvent {
         this.pushEventData({});
     }
 }
+
+export default UserRegistrationEvent;

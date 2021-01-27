@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_PRODUCT_DETAIL, EVENT_GTM_GENERAL_INIT } from '../../../util/Event';
+import Event, { EVENT_GTM_GENERAL_INIT, EVENT_GTM_PRODUCT_DETAIL } from 'Util/Event';
+
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
 
@@ -20,7 +21,7 @@ export const EVENT_EXECUTION_DELAY = 500;
 /**
  * Product detail push event
  */
-class ProductDetail extends BaseEvent {
+export class ProductDetail extends BaseEvent {
     /**
      * Last product path name
      *

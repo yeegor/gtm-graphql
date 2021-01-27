@@ -10,9 +10,10 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_META_UPDATE, EVENT_GTM_GENERAL_INIT } from '../../../util/Event';
+import Event, { EVENT_GTM_GENERAL_INIT, EVENT_GTM_META_UPDATE } from 'Util/Event';
+import { isEventEnabled } from 'Util/EventConfig';
+
 import BaseEvent from './BaseEvent.event';
-import { isEventEnabled } from '../../../util/EventConfig';
 
 export const GENERAL_EVENT_DELAY = 500;
 
@@ -21,7 +22,7 @@ export const GENERAL_EVENT_DELAY = 500;
  *
  * On: page load, page change location
  */
-class General extends BaseEvent {
+export class General extends BaseEvent {
     /**
      * If already loading data, do not do second request
      *
@@ -66,7 +67,9 @@ class General extends BaseEvent {
             // prevents from firing general on filter change (PLP) and on attribute change (PDP)
             if (
                 pathname === prevPathname
-            ) return;
+            ) {
+                return;
+            }
 
             this.saveCartDataToStorage();
             prevLocation = location;

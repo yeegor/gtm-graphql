@@ -10,10 +10,11 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_PURCHASE } from '../../../util/Event';
-import BaseEvent from './BaseEvent.event';
+import Event, { EVENT_GTM_PURCHASE } from 'Util/Event';
 import { roundPrice } from 'Util/Price';
+
 import ProductHelper from '../utils';
+import BaseEvent from './BaseEvent.event';
 
 export const PURCHASE_EVENT_HANDLE_DELAY = 700;
 export const SPAM_PROTECTION_DELAY = 10000;
@@ -21,7 +22,7 @@ export const SPAM_PROTECTION_DELAY = 10000;
 /**
  * On order success page "Purchase"
  */
-class Purchase extends BaseEvent {
+export class Purchase extends BaseEvent {
     /**
      * Event delay
      *

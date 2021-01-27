@@ -1,4 +1,6 @@
+/* eslint-disable @scandipwa/scandipwa-guidelines/create-config-files */
 /* eslint-disable import/no-cycle */
+
 /**
  * ScandiPWA - Progressive Web App for Magento
  *
@@ -10,24 +12,25 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { PureComponent } from 'react';
 
-import General from './events/General.event';
-import Scripts from './Scripts';
-import Impression from './events/Impression.event';
-import ProductClickEvent from './events/ProductClick.event';
-import AddToCartEvent from './events/AddToCart.event';
-import RemoveFromCartEvent from './events/RemoveFromCart.event';
-import ProductDetailEvent from './events/ProductDetail.event';
-import PurchaseEvent from './events/Purchase.event';
-import CheckoutEvent from './events/Checkout.event';
-import CheckoutOptionEvent from './events/CheckoutOption.event';
-import UserLoginEvent from './events/UserLogin.event';
-import UserRegisterEvent from './events/UserRegister.event';
-import { ONE_MONTH_IN_SECONDS } from 'Util/Request/QueryDispatcher';
 import { CUSTOMER } from 'Store/MyAccount/MyAccount.dispatcher';
 import BrowserDatabase from 'Util/BrowserDatabase';
+import { ONE_MONTH_IN_SECONDS } from 'Util/Request/QueryDispatcher';
+
+import AddToCartEvent from './events/AddToCart.event';
+import CheckoutEvent from './events/Checkout.event';
+import CheckoutOptionEvent from './events/CheckoutOption.event';
+import General from './events/General.event';
+import Impression from './events/Impression.event';
+import ProductClickEvent from './events/ProductClick.event';
+import ProductDetailEvent from './events/ProductDetail.event';
+import PurchaseEvent from './events/Purchase.event';
+import RemoveFromCartEvent from './events/RemoveFromCart.event';
+import UserLoginEvent from './events/UserLogin.event';
+import UserRegisterEvent from './events/UserRegister.event';
+import Scripts from './Scripts';
 
 /**
  * Event list
@@ -59,7 +62,7 @@ export const GTM_INJECTION_TIMEOUT = 4000;
  * Google tag manager wrapper
  * This should have 1 instance to avoid multiple initializations
  */
-class GoogleTagManager extends PureComponent {
+export class GoogleTagManager extends PureComponent {
     static propTypes = {
         gtm: PropTypes.shape(),
         // eslint-disable-next-line react/no-unused-prop-types
@@ -349,7 +352,7 @@ class GoogleTagManager extends PureComponent {
      */
     addDataLayer(data) {
         if (this.enabled) {
-            this.currentDataLayer = Object.assign({}, this.currentDataLayer, data);
+            this.currentDataLayer = { ...this.currentDataLayer, ...data };
         }
     }
 
@@ -382,8 +385,14 @@ class GoogleTagManager extends PureComponent {
             { id, dataLayerName: this.currentDataLayerName }
         );
 
+        const noScript = document.createElement('noscript');
+        noScript.innerHTML = Scripts.getNoScript(
+            { id, dataLayerName: this.currentDataLayerName }
+        );
+
         setTimeout(() => {
             document.head.insertBefore(script, document.head.childNodes[0]);
+            document.body.append(noScript);
         }, GTM_INJECTION_TIMEOUT);
         window[this.currentDataLayerName] = window[this.currentDataLayerName] || [];
     }

@@ -11,9 +11,9 @@
 
 import Event, {
     EVENT_GTM_PRODUCT_ADD_TO_CART
-} from '../../util/Event';
+} from 'Util/Event';
 
-const aroundAfterAddToCart = (args, callback, instance) => {
+export const aroundAfterAddToCart = (args, callback, instance) => {
     const {
         product,
         product: { type_id, variants },
@@ -48,7 +48,7 @@ const aroundAfterAddToCart = (args, callback, instance) => {
 export default {
     'Component/AddToCart/Container': {
         'member-function': {
-            'afterAddToCart': aroundAfterAddToCart
+            afterAddToCart: aroundAfterAddToCart
         }
     }
 };

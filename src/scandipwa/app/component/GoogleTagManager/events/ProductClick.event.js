@@ -10,16 +10,16 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_PRODUCT_CLICK } from '../../../util/Event';
+import Event, { EVENT_GTM_PRODUCT_CLICK } from 'Util/Event';
 
-import BaseEvent from './BaseEvent.event';
-import ProductHelper from '../utils';
 import { EVENT_IMPRESSION } from '../GoogleTagManager.component';
+import ProductHelper from '../utils';
+import BaseEvent from './BaseEvent.event';
 
 /**
  * Product click event
  */
-class ProductClickEvent extends BaseEvent {
+export class ProductClickEvent extends BaseEvent {
     /**
      * Set delay
      *

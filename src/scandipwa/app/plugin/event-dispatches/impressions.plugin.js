@@ -1,15 +1,26 @@
-import Event, {
-    EVENT_GTM_IMPRESSIONS_WISHLIST,
-    EVENT_GTM_IMPRESSIONS_LINKED,
-    EVENT_GTM_IMPRESSIONS_HOME,
-    EVENT_GTM_IMPRESSIONS_PLP,
-    EVENT_GTM_IMPRESSIONS_SEARCH
-} from '../../util/Event';
+/* eslint-disable fp/no-let */
 
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
 import { HOME_PAGE, SEARCH } from 'Component/Header/Header.config';
+import Event, {
+    EVENT_GTM_IMPRESSIONS_HOME,
+    EVENT_GTM_IMPRESSIONS_LINKED,
+    EVENT_GTM_IMPRESSIONS_PLP,
+    EVENT_GTM_IMPRESSIONS_SEARCH,
+    EVENT_GTM_IMPRESSIONS_WISHLIST
+} from 'Util/Event';
 
 /** MyAccountMyWishlistContainer */
-const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
+export const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
     const { wishlistItems, isWishlistLoading } = instance.props;
 
     if (!isWishlistLoading && Object.keys(wishlistItems).length > 0) {
@@ -41,7 +52,7 @@ const MyAccountMyWishlistContainer_render = (args, callback, instance) => {
 };
 
 /** ProductLinks */
-const ProductLinks_componentDidUpdate = (args, callback, instance) => {
+export const ProductLinks_componentDidUpdate = (args, callback, instance) => {
     const [prevProps] = args;
 
     const { areDetailsLoaded } = instance.props;
@@ -59,17 +70,16 @@ const ProductLinks_componentDidUpdate = (args, callback, instance) => {
     callback(...args);
 };
 
-
 /**
  * Get query variable value (from react router)
- * Copied from Util/Url to avoid calling Store util which breaks plugin sequence.
+ * Copied from 'Util/Url to avoid calling Store util which breaks plugin sequence.
  * @param {String} variable Variable from URL
  * @param {Object} variable location object from react-router
  * @param location
  * @return {String|boolean} Variable value
  * @namespace Util/Url/getQueryParam
  */
-const getQueryParam = (variable, location) => {
+export const getQueryParam = (variable, location) => {
     const query = location.search.substring(1);
     const vars = query.split('&');
     // eslint-disable-next-line fp/no-loops
@@ -84,7 +94,7 @@ const getQueryParam = (variable, location) => {
 };
 
 /** ProductList */
-const ProductList_componentDidUpdate = (args, callback, instance) => {
+export const ProductList_componentDidUpdate = (args, callback, instance) => {
     callback(...args);
 
     const [prevProps] = args;
@@ -104,7 +114,9 @@ const ProductList_componentDidUpdate = (args, callback, instance) => {
         || !Object.keys(pages[currentPage] || {}).length
         || isLoading
         || isLoading === prevIsLoading
-    ) return;
+    ) {
+        return;
+    }
 
     const { currentRouteName } = window;
 
@@ -131,17 +143,17 @@ const ProductList_componentDidUpdate = (args, callback, instance) => {
 export default {
     'Component/MyAccountMyWishlist/Container': {
         'member-function': {
-            'render': MyAccountMyWishlistContainer_render
+            render: MyAccountMyWishlistContainer_render
         }
     },
     'Component/ProductLinks/Container': {
         'member-function': {
-            'componentDidUpdate': ProductLinks_componentDidUpdate
+            componentDidUpdate: ProductLinks_componentDidUpdate
         }
     },
     'Component/ProductList/Container': {
         'member-function': {
-            'componentDidUpdate': ProductList_componentDidUpdate
+            componentDidUpdate: ProductList_componentDidUpdate
         }
     }
 };
