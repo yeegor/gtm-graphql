@@ -1,9 +1,19 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
 import Event, {
     EVENT_GTM_PRODUCT_REMOVE_FROM_CART
-} from '../../util/Event';
+} from 'Util/Event';
 
 // TODO split
-class RemoveItemPlugin {
+export class RemoveItemPlugin {
     handleRemoveItem = (args, callback, instance) => {
         callback(...args);
         const { item } = instance.props;
@@ -15,12 +25,12 @@ class RemoveItemPlugin {
         };
     };
 
-    removeProductFromCart = (args, callback, instance) => {
+    removeProductFromCart = (args, callback) => {
         const { item, quantity } = this.handleRemoveState;
 
         return callback(...args)
             .then(
-                result => {
+                (result) => {
                     Event.dispatch(EVENT_GTM_PRODUCT_REMOVE_FROM_CART, {
                         item,
                         quantity
@@ -40,12 +50,12 @@ const {
 export default {
     'Component/CartItem/Container': {
         'member-function': {
-            'handleRemoveItem': handleRemoveItem
+            handleRemoveItem
         }
     },
     'Store/Cart/Dispatcher': {
         'member-function': {
-            'removeProductFromCart': removeProductFromCart
+            removeProductFromCart
         }
     }
 };

@@ -1,20 +1,28 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
+import GoogleTagManager, { GROUPED_PRODUCTS_GUEST } from 'Component/GoogleTagManager/GoogleTagManager.component';
+import ProductHelper from 'Component/GoogleTagManager/utils/Product';
+import GtmQuery from 'Query/Gtm.query';
 import { UPDATE_CONFIG } from 'Store/Config/Config.action';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import GoogleTagManager, { GROUPED_PRODUCTS_GUEST } from '../component/GoogleTagManager/GoogleTagManager.component';
-import GtmQuery from '../query/Gtm.query';
-import ProductHelper from '../component/GoogleTagManager/utils/Product';
 
-const handle_syncCartWithBEError = (args, callback, instance) => {
-    return callback(...args)
-        .then(
-            (result) => {
-                GoogleTagManager.getInstance().setGroupedProducts({});
-                return result;
-            }
-        );
-};
+export const handle_syncCartWithBEError = (args, callback) => callback(...args)
+    .then(
+        (result) => {
+            GoogleTagManager.getInstance().setGroupedProducts({});
+            return result;
+        }
+    );
 
-const addGtmConfigQuery = (args, callback, instance) => {
+export const addGtmConfigQuery = (args, callback) => {
     const original = callback(...args);
     return [
         ...(Array.isArray(original) ? original : [original]),
@@ -22,7 +30,7 @@ const addGtmConfigQuery = (args, callback, instance) => {
     ];
 };
 
-const addGtmToConfigReducerInitialState = (args, callback, instance) => {
+export const addGtmToConfigReducerInitialState = (args, callback) => {
     const { gtm } = BrowserDatabase.getItem('config') || { gtm: {} };
 
     return {
@@ -31,7 +39,7 @@ const addGtmToConfigReducerInitialState = (args, callback, instance) => {
     };
 };
 
-const addGtmToConfigUpdate = (args, callback, context) => {
+export const addGtmToConfigUpdate = (args, callback, context) => {
     const [, action] = args;
     const originalUpdatedState = callback.apply(context, args);
 
@@ -51,7 +59,7 @@ const addGtmToConfigUpdate = (args, callback, context) => {
     };
 };
 
-const afterRequestCustomerData = (args, callback, instance) => {
+export const afterRequestCustomerData = (args, callback) => {
     const gtm = GoogleTagManager.getInstance();
 
     /** transfer grouped products data from guest to logged in user */
@@ -71,7 +79,7 @@ const afterRequestCustomerData = (args, callback, instance) => {
     };
 
     return callback(...args)
-        .then(result => {
+        .then((result) => {
             transferGroupedProductsData(customer.id);
             gtm.updateGroupedProductsStorageName(customer.id);
 
@@ -82,23 +90,23 @@ const afterRequestCustomerData = (args, callback, instance) => {
 export default {
     'Store/Cart/Dispatcher': {
         'member-function': {
-            'handle_syncCartWithBEError': handle_syncCartWithBEError
+            handle_syncCartWithBEError
         }
     },
     'Store/Config/Dispatcher': {
         'member-function': {
-            'prepareRequest': addGtmConfigQuery
+            prepareRequest: addGtmConfigQuery
         }
     },
     'Store/Config/Reducer/getInitialState': {
-        'function': addGtmToConfigReducerInitialState
+        function: addGtmToConfigReducerInitialState
     },
     'Store/Config/Reducer': {
-        'function': addGtmToConfigUpdate
+        function: addGtmToConfigUpdate
     },
     'Store/MyAccount/Dispatcher': {
         'member-function': {
-            'requestCustomerData': afterRequestCustomerData
+            requestCustomerData: afterRequestCustomerData
         }
     }
 };

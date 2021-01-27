@@ -1,7 +1,17 @@
-import Event, { EVENT_GTM_PRODUCT_DETAIL } from '../../util/Event';
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
+import Event, { EVENT_GTM_PRODUCT_DETAIL } from 'Util/Event';
 
 /** ProductPage */
-const _gtmProductDetail = (instance) => {
+export const _gtmProductDetail = (instance) => {
     const { product, location: { pathname }, configurableVariantIndex } = instance.props;
 
     if (product && product.price && product.attributes) {
@@ -12,7 +22,7 @@ const _gtmProductDetail = (instance) => {
     }
 };
 
-const componentDidMount = (args, callback, instance) => {
+export const componentDidMount = (args, callback, instance) => {
     const { areDetailsLoaded } = instance.props;
 
     if (areDetailsLoaded) {
@@ -22,7 +32,7 @@ const componentDidMount = (args, callback, instance) => {
     return callback(...args);
 };
 
-const componentDidUpdate = (args, callback, instance) => {
+export const componentDidUpdate = (args, callback, instance) => {
     const [prevProps] = args;
     const shouldTriggerGtm = () => {
         const {
@@ -41,7 +51,6 @@ const componentDidUpdate = (args, callback, instance) => {
         );
     };
 
-
     if (shouldTriggerGtm()) {
         _gtmProductDetail(instance);
     }
@@ -52,8 +61,8 @@ const componentDidUpdate = (args, callback, instance) => {
 export default {
     'Route/ProductPage/Component': {
         'member-function': {
-            'componentDidMount': componentDidMount,
-            'componentDidUpdate': componentDidUpdate
+            componentDidMount,
+            componentDidUpdate
         }
     }
 };

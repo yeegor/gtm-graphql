@@ -17,7 +17,7 @@ import { isEventEnabled } from '../EventConfig';
  * Should be used only for data collecting or 3'rd service integration.
  * For React internal data flows use react specified data flows architecture
  */
-class Event {
+export class Event {
     /**
      * Dispatch global event
      *
@@ -47,7 +47,9 @@ class Event {
      */
     static observer(name, callback) {
         if (callback && typeof callback === 'function' && isEventEnabled(name)) {
-            const callbackWrapper = ({ detail: data }) => { callback.call(this, data); };
+            const callbackWrapper = ({ detail: data }) => {
+                callback.call(this, data);
+            };
 
             window.addEventListener(name, callbackWrapper, false);
 

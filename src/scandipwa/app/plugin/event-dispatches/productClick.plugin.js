@@ -1,11 +1,21 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
 import { cloneElement } from 'react';
 
 import Event, {
     EVENT_GTM_PRODUCT_CLICK
-} from '../../util/Event';
+} from 'Util/Event';
 
 /** ProductCard */
-const ProductCard_renderCardWrapper = (args, callback, instance) => {
+export const ProductCard_renderCardWrapper = (args, callback, instance) => {
     const [children] = args;
     const handleClick = () => {
         const {
@@ -35,7 +45,7 @@ const ProductCard_renderCardWrapper = (args, callback, instance) => {
 export default {
     'Component/ProductCard/Component': {
         'member-function': {
-            'renderCardWrapper': ProductCard_renderCardWrapper
+            renderCardWrapper: ProductCard_renderCardWrapper
         }
     }
 };

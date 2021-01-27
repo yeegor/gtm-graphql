@@ -9,8 +9,22 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
+import { EVENT_IMPRESSION } from 'Component/GoogleTagManager/GoogleTagManager.component';
 import BrowserDatabase from 'Util/BrowserDatabase';
-import { EVENT_IMPRESSION } from '../../component/GoogleTagManager/GoogleTagManager.component';
+
+/**
+ * Map GTM event names to config event names
+ * @param name
+ * @returns {string}
+ */
+export const mapGtmEventNames = (name) => {
+    switch (name) {
+    case name.includes('impressions'):
+        return EVENT_IMPRESSION;
+    default:
+        return name;
+    }
+};
 
 /**
  * Check if push event is enabled in config
@@ -25,18 +39,4 @@ export const isEventEnabled = (eventName) => {
     } = BrowserDatabase.getItem('config') || {};
 
     return !!events[mapGtmEventNames(eventName)];
-};
-
-/**
- * Map GTM event names to config event names
- * @param name
- * @returns {string}
- */
-export const mapGtmEventNames = (name) => {
-    switch (name) {
-        case name.includes('impressions'):
-            return EVENT_IMPRESSION;
-        default:
-            return name;
-    }
 };

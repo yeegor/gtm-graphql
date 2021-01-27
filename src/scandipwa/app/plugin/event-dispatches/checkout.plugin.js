@@ -1,15 +1,24 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
+import { CHECKOUT_EVENT_DELAY } from 'Component/GoogleTagManager/events/Checkout.event';
+import { BILLING_STEP } from 'Route/Checkout/Checkout.config';
 import Event, {
     EVENT_GTM_CHECKOUT
-} from '../../util/Event';
-
-import { CHECKOUT_EVENT_DELAY } from '../../component/GoogleTagManager/events/Checkout.event';
-import { BILLING_STEP } from 'Route/Checkout/Checkout.config';
+} from 'Util/Event';
 
 export const GTM_CART_PAGE_STEP = 1;
 export const GTM_SHIPPING_STEP = 2;
 export const GTM_BILLING_STEP = 3;
 
-const componentDidMount = (args, callback, instance) => {
+export const componentDidMount = (args, callback, instance) => {
     const { totals = {} } = instance.props;
     const { checkoutStep } = instance.state || {};
 
@@ -24,7 +33,7 @@ const componentDidMount = (args, callback, instance) => {
     return callback(...args);
 };
 
-const componentDidUpdate = (args, callback, instance) => {
+export const componentDidUpdate = (args, callback, instance) => {
     const [, prevState] = args;
 
     const { checkoutStep, isLoading } = instance.state;
@@ -45,17 +54,16 @@ const componentDidUpdate = (args, callback, instance) => {
     return callback(...args);
 };
 
-
 export default {
     'Route/Checkout/Container': {
         'member-function': {
-            'componentDidMount': componentDidMount,
-            'componentDidUpdate': componentDidUpdate
+            componentDidMount,
+            componentDidUpdate
         }
     },
     'Route/CartPage/Container': {
         'member-function': {
-            'componentDidMount': componentDidMount
+            componentDidMount
         }
     }
 };

@@ -1,8 +1,18 @@
-import { EVENT_TIMEOUT_ON_LOAD } from '../../component/GoogleTagManager/events/CheckoutOption.event';
-import Event, { EVENT_GTM_CHECKOUT_OPTION } from '../../util/Event';
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
+import { EVENT_TIMEOUT_ON_LOAD } from 'Component/GoogleTagManager/events/CheckoutOption.event';
+import Event, { EVENT_GTM_CHECKOUT_OPTION } from 'Util/Event';
 
 /** CheckoutPayments */
-const aroundComponentDidMount = (args, callback, instance) => {
+export const aroundComponentDidMount = (args, callback, instance) => {
     const { selectedPaymentCode } = instance.state;
     setTimeout(
         () => Event.dispatch(
@@ -15,7 +25,7 @@ const aroundComponentDidMount = (args, callback, instance) => {
     return callback(...args);
 };
 
-const aroundSelectPaymentMethod = (args, callback, instance) => {
+export const aroundSelectPaymentMethod = (args, callback) => {
     const [{ code }] = args;
     Event.dispatch(
         EVENT_GTM_CHECKOUT_OPTION,
@@ -26,7 +36,7 @@ const aroundSelectPaymentMethod = (args, callback, instance) => {
 };
 
 /** CheckoutDeliveryOptionsContainer */
-const aroundComponentDidUpdate = (args, callback, instance) => {
+export const aroundComponentDidUpdate = (args, callback, instance) => {
     const [, prevState] = args;
 
     const { selectedShippingMethodCode } = instance.state;
@@ -45,13 +55,13 @@ const aroundComponentDidUpdate = (args, callback, instance) => {
 export default {
     'Component/CheckoutPayments/Container': {
         'member-function': {
-            'componentDidMount': aroundComponentDidMount,
-            'selectPaymentMethod': aroundSelectPaymentMethod
+            componentDidMount: aroundComponentDidMount,
+            selectPaymentMethod: aroundSelectPaymentMethod
         }
     },
     'Component/CheckoutDeliveryOptions/Container': {
         'member-function': {
-            'componentDidUpdate': aroundComponentDidUpdate
+            componentDidUpdate: aroundComponentDidUpdate
         }
     }
 };

@@ -1,31 +1,37 @@
+/**
+ * ScandiPWA - Progressive Web App for Magento
+ *
+ * Copyright © Scandiweb, Inc. All rights reserved.
+ * See LICENSE for license details.
+ *
+ * @license OSL-3.0 (Open Software License ("OSL") v. 3.0)
+ * @package scandipwa/base-theme
+ * @link https://github.com/scandipwa/base-theme
+ */
 import Event, {
-    EVENT_GTM_USER_REGISTER,
-    EVENT_GTM_USER_LOGIN
-} from '../../util/Event';
+    EVENT_GTM_USER_LOGIN,
+    EVENT_GTM_USER_REGISTER
+} from 'Util/Event';
 
-const createAccount = (args, callback, instance) => {
-    return callback(...args)
-        .then((signInPromise) => {
-            Event.dispatch(EVENT_GTM_USER_REGISTER);
+export const createAccount = (args, callback) => callback(...args)
+    .then((signInPromise) => {
+        Event.dispatch(EVENT_GTM_USER_REGISTER);
 
-            return signInPromise;
-        });
-};
+        return signInPromise;
+    });
 
-const signIn = (args, callback, instance) => {
-    return callback(...args)
-        .then((result) => {
-            Event.dispatch(EVENT_GTM_USER_LOGIN);
+export const signIn = (args, callback) => callback(...args)
+    .then((result) => {
+        Event.dispatch(EVENT_GTM_USER_LOGIN);
 
-            return result;
-        });
-};
+        return result;
+    });
 
 export default {
     'Store/MyAccount/Dispatcher': {
         'member-function': {
-            'createAccount': createAccount,
-            'signIn': signIn
+            createAccount,
+            signIn
         }
     }
 };

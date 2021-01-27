@@ -10,7 +10,8 @@
  * @link https://github.com/scandipwa/base-theme
  */
 
-import Event, { EVENT_GTM_CHECKOUT } from '../../../util/Event';
+import Event, { EVENT_GTM_CHECKOUT } from 'Util/Event';
+
 import ProductHelper from '../utils';
 import BaseEvent from './BaseEvent.event';
 
@@ -20,7 +21,7 @@ export const SPAM_PROTECTION_DELAY = 1000;
 /**
  * On checkout
  */
-class CheckoutEvent extends BaseEvent {
+export class CheckoutEvent extends BaseEvent {
     /**
      * Event fire delay
      *
